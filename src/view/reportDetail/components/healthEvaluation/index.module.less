@@ -1,0 +1,192 @@
+.starModel {
+  background: #f6faff;
+  border-radius: 12px 12px 12px 12px;
+  border: 1px solid #e4edf7;
+  width: 100%;
+  padding-top: 66px;
+  padding-bottom: 26px;
+  overflow: hidden;
+  .ring {
+    width: 255px;
+    height: 256px;
+    border-radius: 0px 0px 0px 0px;
+    border: 10px solid #9cd1f8;
+    margin: auto;
+    border-radius: 100%;
+    position: relative;
+    .personImg {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: 32%;
+      // height: 80%;
+      > img {
+        width: 100%;
+        // height: 100%;
+      }
+    }
+    .cycle {
+      width: 77px;
+      height: 77px;
+      box-shadow: 0px 2px 3px 0px rgba(36, 67, 78, 0.25);
+      border-radius: 0px 0px 0px 0px;
+      border: 3px solid #ffffff;
+      border-radius: 100%;
+      position: absolute;
+      font-family:
+        Source Han Sans CN,
+        Source Han Sans CN;
+      font-weight: bold;
+      font-size: 15px;
+      color: #ffffff;
+      line-height: 20px;
+      display: flex;
+      flex-direction: column; /* 垂直排列 */
+      justify-content: center; /* 垂直居中 */
+      align-items: center;
+      text-align: center;
+    }
+    .liverCycle {
+      background-color: #5a9d5c;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: -5%;
+      .star {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -22px;
+        :global(.ant-rate .ant-rate-star-first) {
+          top: -2px;
+        }
+      }
+    }
+    .kidneyCycle {
+      background-color: #5b9dd8;
+      top: 20%;
+      left: -15%;
+      .star {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -22px;
+        :global(.ant-rate .ant-rate-star-first) {
+          top: -2px;
+        }
+      }
+    }
+    .lungCycle {
+      background-color: #f5bb21;
+      top: 70%;
+      left: 0%;
+      .star {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -28px;
+        :global(.ant-rate .ant-rate-star-first) {
+          top: -2px;
+        }
+      }
+    }
+    .spleenCycle {
+      background-color: #a79a59;
+      top: 70%;
+      right: 0%;
+      .star {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -28px;
+        :global(.ant-rate .ant-rate-star-first) {
+          top: -2px;
+        }
+      }
+    }
+    .heartCycle {
+      background-color: #c94f2c;
+      top: 20%;
+      right: -15%;
+      .star {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -22px;
+        :global(.ant-rate .ant-rate-star-first) {
+          top: -2px;
+        }
+      }
+    }
+    .customRate {
+      :global {
+        .ant-rate {
+          font-size: 16px; /* 这里使用 px，postcss 会自动转为 vw */
+          .ant-rate-star {
+            margin-inline-end: 4px; /* 调整星星之间的间距，也会自动转为 vw */
+          }
+          /* 未选中的星星背景颜色 */
+          .ant-rate-star-zero svg {
+            color: #B9C1C8; /* 设置为半透明白色，您可以根据需求修改颜色值 */
+          }
+          .ant-rate-star-second {
+            font-size: 12px; /* 原有特殊样式保留，同样会被转换 */
+          }
+        }
+      }
+    }
+  }
+}
+
+.bottomTitle{
+    font-family: Source Han Sans CN, Source Han Sans CN;
+    font-weight: bold;
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 22px;
+    margin-top: 20px;
+}
+
+.bottomLine{
+    width: 100%;
+    height: 7px;
+    background: linear-gradient( 90deg, #FF6262 0%, #FBBF24 57.69%, #34D399 100%);
+    border-radius: 4px 4px 4px 4px;
+    position: relative;
+    margin: 15px 0px;
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 12px solid #1677FF;
+        position: absolute;
+        top: -10px;
+        border-radius: 2px;
+    }
+    .lineText{
+        position: absolute;
+        width: 100%;
+        bottom: -20px;
+        display: flex;
+        justify-content: space-between;
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: 400;
+        font-size: 9px;
+        color: #9CA3AF;
+    }
+}
+
+.bottomDetail{
+    font-family: Source Han Sans CN, Source Han Sans CN;
+    font-weight: 400;
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 22px;
+    margin-top: 40px;
+}

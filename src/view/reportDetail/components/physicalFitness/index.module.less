@@ -1,0 +1,216 @@
+.topModel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .leftModel {
+    display: flex;
+    align-items: center;
+
+    .typeModel {
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+
+      .typeText {
+        font-family:
+          Source Han Sans CN,
+          Source Han Sans CN;
+        font-weight: 400;
+        font-size: 17px;
+        color: #4b5563;
+        margin-right: 3px;
+      }
+
+      .rightRate {
+        width: 48px;
+        height: 20px;
+        background: #ffffff;
+        border-radius: 1px 1px 1px 1px;
+        border: 1px solid #e0e0e0;
+        font-family:
+          Source Han Sans CN,
+          Source Han Sans CN;
+        font-weight: 400;
+        font-size: 11px;
+        color: #999999;
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .typeIcon {
+    // width: 80px;
+    // height: 28px;
+    background: #FDF2F2;
+    border-radius: 999px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    max-width: 100px;
+
+    .leftCycle {
+      width: 6px;
+      height: 6px;
+      background: #FF6C52;
+      border-radius: 100%;
+      margin-right: 4px;
+    }
+
+    .rightText {
+      font-family: Source Han Sans CN, Source Han Sans CN;
+      font-weight: 400;
+      font-size: 13px;
+      color: #000000;
+    }
+  }
+}
+
+.lineModel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 110px;
+
+  .barItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    flex: 1;
+
+    .barTrack {
+      display: flex;
+      flex-direction: column;
+      /* 垂直排列，让数字在柱子正上方 */
+      align-items: center;
+      justify-content: flex-end;
+      height: 100px;
+      /* 增加总高度以容纳数字和柱子 */
+      width: 100%;
+
+      .score {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 2px;
+        /* 控制数字和柱子之间的间距 */
+        font-family: Arial, Helvetica, sans-serif;
+        opacity: 0;
+        /* 初始隐藏 */
+        transition: opacity 0.5s ease 0.5s;
+        /* 延迟显示，等柱子长起来 */
+
+        &.show {
+          opacity: 1;
+          /* 动画触发后显示 */
+        }
+      }
+
+      .barFill {
+        width: 20px;
+        /* 柱子的宽度 */
+        background: #A9D1F4;
+        /* 默认浅蓝色 */
+        border-radius: 4px 4px 4px 4px;
+        height: 0;
+        transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        &.highlight {
+          background: linear-gradient(180deg, #5AB3FF 0%, #5E71FF 100%);
+          /* 高亮渐变色 */
+        }
+      }
+    }
+
+    .name {
+      font-size: 10px;
+      color: #666;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      transform: scale(0.9);
+      /* 移动端字号小于 12px 的处理方案 */
+      white-space: nowrap;
+    }
+  }
+}
+
+.resultModel {
+  .resultTitle {
+    font-family: Source Han Sans CN, Source Han Sans CN;
+    font-weight: bold;
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 22px;
+  }
+
+  .resultDesc {
+    font-family: Source Han Sans CN, Source Han Sans CN;
+    font-weight: 400;
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 22px;
+
+    .highlightText {
+      color: #13BB3D;
+      /* 绿色高亮文字 */
+      font-weight: 600;
+    }
+  }
+
+  .tableContainer {
+    margin-top: 6px;
+    border: 1px solid #E8EEF7;
+    /* 表格外边框 */
+    border-radius: 8px;
+    overflow: hidden;
+    /* 保证圆角内元素不溢出 */
+
+    .tableRow {
+      display: flex;
+      border-bottom: 1px solid #E8EEF7;
+      /* 行间分割线 */
+
+      &:last-child {
+        border-bottom: none;
+        /* 最后一行去掉底边框 */
+      }
+
+      .rowLabel {
+        width: 110px;
+        flex-shrink: 0;
+        padding: 12px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: 550;
+        font-size: 14px;
+        color: #14181f;
+        border-right: 1px solid #E8EEF7;
+        /* 标签和值之间的竖线 */
+      }
+
+      .rowValue {
+        flex: 1;
+        padding: 12px 10px;
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: 400;
+        font-size: 13px;
+        color: #293445;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        /* 垂直居中多行文字 */
+      }
+    }
+    .activeBak{
+        background-color: #F5F9FF;
+    }
+  }
+}
