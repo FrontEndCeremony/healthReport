@@ -9,7 +9,7 @@ import PulseEvaluation from './components/pulseEvaluation';
 import PhysicalFitness from './components/physicalFitness';
 import HealthManagementPlan from './components/healthManagementPlan';
 import LoadingState from './components/loadingState';
-import { exportPDF } from '@/utils/exportPdf';
+import { exportImage } from '@/utils/exportImage';
 import { throttle } from '@/utils/tool'
 import { getHealthReport } from '@/api/report'
 import { useEffect, useState } from 'react'
@@ -47,6 +47,9 @@ export default function ReportDetail() {
 
     const [isTimeout, setIsTimeout] = useState(false) // 记录是否生成超时
     const [isNotFound, setIsNotFound] = useState(false) // 记录是否未找到报告
+
+    const [isExporting, setIsExporting] = useState(false) // 导出加载状态
+    const [exportImgUrl, setExportImgUrl] = useState<string | null>(null) // 生成的长图URL
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
@@ -108,8 +111,17 @@ export default function ReportDetail() {
         return <LoadingState message={t('loading')} />;
     }
 
-    const handleExport = () => {
-        exportPDF('report-content', `${uuid}-健康体检报告.pdf`);
+    const handleExport = async () => {
+        setIsExporting(true);
+        const imgData = await exportImage('report-content');
+        if (imgData) {
+            setExportImgUrl(imgData);
+        }
+        setIsExporting(false);
+    };
+
+    const handleCloseModal = () => {
+        setExportImgUrl(null);
     };
 
     return (
@@ -130,7 +142,7 @@ export default function ReportDetail() {
                 <div>{t('instruction_3')}</div>
             </div>
             <div className={`${style.bottomButton} pdf-hide`} onClick={throttle(() => handleExport(), 5000)}>
-                {t('save_pdf')}
+                {isExporting ? t('loading') : t('save_image')}
             </div>
             <div className={style.QRCodeText}>{t('qrcode_tip')}</div>
             <div className={style.QRCodeImg}>
@@ -142,6 +154,22 @@ export default function ReportDetail() {
             <div className={`${style.bottomText} pdf-avoid-break`}>
                 {t('generate_time')}{checkTime}
             </div>
+
+            {/* 长图预览弹窗 */}
+            {exportImgUrl && (
+                <div className={style.imageModal}>
+                    <div className={style.modalMask} onClick={handleCloseModal}></div>
+                    <div className={style.modalContent}>
+                        <div className={style.modalHeader}>
+                            <span className={style.modalTitle}>{t('long_press_save')}</span>
+                            <span className={style.closeBtn} onClick={handleCloseModal}>{t('close')}</span>
+                        </div>
+                        <div className={style.imageContainer}>
+                            <img src={exportImgUrl} alt="Report" className={style.previewImage} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

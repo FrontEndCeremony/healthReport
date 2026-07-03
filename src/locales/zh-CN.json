@@ -1,6 +1,9 @@
 {
   "loading": "报告生成中",
   "save_pdf": "保存为PDF",
+  "save_image": "保存为图片",
+  "long_press_save": "长按上方图片保存到手机",
+  "close": "关闭",
   "instruction": "说明：",
   "instruction_1": "1.本报告仅对本次检测结果负责。",
   "instruction_2": "2.健康管理是对个人健康风险因素通过检测、评估及干预等手段，帮助个人控制健康风险、改善健康状况的过程。",
