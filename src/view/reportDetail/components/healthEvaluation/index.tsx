@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
   const { t } = useTranslation();
-  const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, ComprehensiveScore = 0, comprehensiveDescription = '' } = comprehensiveAnalysis || {}
+  const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, comprehensiveDescription = '', healthRisk = '' } = comprehensiveAnalysis || {}
 
   return (
     <>
@@ -53,8 +53,10 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
             </div>
           </div>
         </div>
-        <div className={style.bottomTitle}>{t('comprehensive_evaluation')}</div>
-        <div className={style.bottomLine}>
+        <div className={style.bottomTitle}>{t('comprehensive_evaluation')} 
+           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '轻微' ? { color: '#7CD334'} : healthRisk == '中等' ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
+        </div>
+        {/* <div className={style.bottomLine}>
           <div
             className={style.triangle}
             style={{
@@ -67,7 +69,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
             <div>{t('medium_risk')}</div>
             <div>{t('healthy')}</div>
           </div>
-        </div>
+        </div> */}
         <div className={style.bottomDetail}>{comprehensiveDescription}</div>
       </BaseModel>
     </>
