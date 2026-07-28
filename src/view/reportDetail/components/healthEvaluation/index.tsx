@@ -54,7 +54,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
           </div>
         </div>
         <div className={style.bottomTitle}>{t('comprehensive_evaluation')} 
-           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '轻微' ? { color: '#7CD334'} : healthRisk == '中等' ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
+           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '健康' ? { color: '#7CD334'} : (healthRisk == '中风险'  || healthRisk == '轻微风险') ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
         </div>
         {/* <div className={style.bottomLine}>
           <div
