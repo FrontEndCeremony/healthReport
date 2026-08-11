@@ -132,7 +132,7 @@
           }
           /* 未选中的星星背景颜色 */
           .ant-rate-star-zero svg {
-            color: #B9C1C8; /* 设置为半透明白色，您可以根据需求修改颜色值 */
+            color: #b9c1c8; /* 设置为半透明白色，您可以根据需求修改颜色值 */
           }
           .ant-rate-star-second {
             font-size: 12px; /* 原有特殊样式保留，同样会被转换 */
@@ -143,57 +143,327 @@
   }
 }
 
-.bottomTitle{
-    font-family: Source Han Sans CN, Source Han Sans CN;
-    font-weight: bold;
-    font-size: 14px;
-    color: #6B7280;
-    line-height: 22px;
-    margin-top: 20px;
+.bottomTitle {
+  font-family:
+    Source Han Sans CN,
+    Source Han Sans CN;
+  font-weight: bold;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 22px;
+  margin-top: 20px;
 }
 
-.levelText{
-  font-family: Source Han Sans CN, Source Han Sans CN;
+.resultDetail {
+  display: flex;
+  // justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 17px;
+  .resultItem {
+    box-sizing: border-box;
+    padding: 0px 12px;
+    overflow: hidden;
+    width: fit-content;
+    height: 28px;
+    border: 1px solid #00b42a;
+    text-align: center;
+    line-height: 28px;
+    font-family:
+      Source Han Sans CN,
+      Source Han Sans CN;
+    font-weight: 500;
+    font-size: 12px;
+    color: #00b42a;
+    margin-bottom: 8px;
+    margin-left: 8px;
+  }
+  .noResult {
+    font-family:
+      Source Han Sans CN,
+      Source Han Sans CN;
+    font-weight: 400;
+    font-size: 26px;
+    color: #4b5563;
+    line-height: 42px;
+  }
+}
+
+.levelText {
+  font-family:
+    Source Han Sans CN,
+    Source Han Sans CN;
   font-weight: bold;
   font-size: 24px;
   line-height: 32px;
 }
 
-.bottomLine{
+.bottomLine {
+  width: 100%;
+  height: 7px;
+  background: linear-gradient(90deg, #ff6262 0%, #fbbf24 57.69%, #34d399 100%);
+  border-radius: 4px 4px 4px 4px;
+  position: relative;
+  margin: 15px 0px;
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid #1677ff;
+    position: absolute;
+    top: -10px;
+    border-radius: 2px;
+  }
+  .lineText {
+    position: absolute;
     width: 100%;
-    height: 7px;
-    background: linear-gradient( 90deg, #FF6262 0%, #FBBF24 57.69%, #34D399 100%);
-    border-radius: 4px 4px 4px 4px;
-    position: relative;
-    margin: 15px 0px;
-    .triangle {
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 12px solid #1677FF;
-        position: absolute;
-        top: -10px;
-        border-radius: 2px;
-    }
-    .lineText{
-        position: absolute;
-        width: 100%;
-        bottom: -20px;
-        display: flex;
-        justify-content: space-between;
-        font-family: Source Han Sans CN, Source Han Sans CN;
-        font-weight: 400;
-        font-size: 9px;
-        color: #9CA3AF;
-    }
+    bottom: -20px;
+    display: flex;
+    justify-content: space-between;
+    font-family:
+      Source Han Sans CN,
+      Source Han Sans CN;
+    font-weight: 400;
+    font-size: 9px;
+    color: #9ca3af;
+  }
 }
 
-.bottomDetail{
-    font-family: Source Han Sans CN, Source Han Sans CN;
+.bottomDetail {
+  font-family:
+    Source Han Sans CN,
+    Source Han Sans CN;
+  font-weight: 400;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 22px;
+  margin-top: 12px;
+}
+
+.riskResult {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 15px;
+  .riskTitle {
+    display: flex;
+    justify-content: space-between;
+    .titleLeft {
+      display: flex;
+      align-items: center;
+      font-family:
+        Source Han Sans CN,
+        Source Han Sans CN;
+      font-weight: 400;
+      font-size: 16px;
+      color: #ff6c52;
+      .titleIcon {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        > img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .riskDetail {
+    margin: 10px 0px;
+    display: flex;
+    align-items: top;
+    box-sizing: border-box;
+    padding-bottom: 8px;
+    border-bottom: 2px dashed #e5e7eb;
+    cursor: pointer;
+    .tagDetail {
+      width: 90%;
+      .tagType {
+        font-family:
+          Source Han Sans CN,
+          Source Han Sans CN;
+        font-weight: 400;
+        font-size: 16px;
+        color: #ff6c52;
+        line-height: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ff6c52;
+        border-radius: 32px;
+        letter-spacing: 1px;
+        margin-right: 6px;
+      }
+      .tagContent {
+        font-family:
+          Source Han Sans CN,
+          Source Han Sans CN;
+        font-weight: 400;
+        font-size: 14px;
+        color: #4b5563;
+        line-height: 14px;
+        flex: 1;
+      }
+    }
+    .tagArrow {
+      width: 13px;
+      height: 12px;
+      box-sizing: border-box;
+      padding: 5px 0px;
+      margin-left: 10px;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      > img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.organTip {
+  width: 100%;
+  .tipTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .tipTitleLeft {
+      display: flex;
+      align-items: center;
+      .tipIcon {
+        margin-right: 8px;
+        width: 20px;
+        height: 20px;
+        > img {
+          width: 100%;
+        }
+      }
+      .tipText {
+        font-family:
+          Source Han Sans CN,
+          Source Han Sans CN;
+        font-weight: 400;
+        font-size: 16px;
+        color: #1677ff;
+      }
+    }
+    .moreIcon {
+      background: #f0f5ff;
+      border-radius: 18px;
+      font-family:
+        Source Han Sans CN,
+        Source Han Sans CN;
+      font-weight: 400;
+      font-size: 14px;
+      color: #1677ff;
+      box-sizing: border-box;
+      padding: 3px 9px;
+      display: flex;
+      align-items: center;
+      .downIcon {
+        width: 12px;
+        margin-left: 6px;
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        > img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .tipSubTitle {
+    margin-top: 10px;
+    font-family:
+      Source Han Sans CN,
+      Source Han Sans CN;
     font-weight: 400;
     font-size: 14px;
-    color: #6B7280;
-    line-height: 22px;
-    margin-top: 12px;
+    color: #4b5563;
+    line-height: 23px;
+  }
+  .bottomSuggest {
+    margin-top: 13px;
+    .suggestItem {
+       border-bottom: 2px dashed #b9c2d1;
+       padding: 10px 5px;
+       box-sizing: border-box;
+        margin: 10px 0px;
+      .detailTip {
+        display: flex;
+        justify-content: space-between;
+        align-items: top;
+        cursor: pointer;
+        .leftContent {
+          flex: 1;
+          min-width: 0px;
+          display: flex;
+          overflow: hidden;
+          .detailTipTitle {
+            display: flex;
+            align-items: top;
+            width: fit-content;
+            // height: 42px;
+            height: fit-content;
+            background: linear-gradient(90deg, #ffffff 0%, #ffe7c8 100%);
+            border-radius: 20px 6px 6px 20px;
+            .typeIcon {
+              width: 28px;
+              height: 24px;
+              background: #e46648;
+              border-radius: 11px 0px 11px 11px;
+              box-sizing: border-box;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              > img {
+                width: 50%;
+              }
+            }
+            .typeIconNone {
+              width: 28px;
+              height: 24px;
+              background: #6c1d0a;
+              border-radius: 11px 0px 11px 11px;
+              box-sizing: border-box;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              > img {
+                width: 50%;
+              }
+            }
+            .typeText {
+              flex: 1;
+              // overflow: hidden;
+              font-family:
+                GenRyuMin2 TC,
+                GenRyuMin2 TC;
+              font-weight: normal;
+              font-size: 14px;
+              color: #634d4b;
+              line-height: 23px;
+              padding: 0px 10px;
+              min-width: 0px;
+              max-width: 255px;
+              // white-space: nowrap;
+              // overflow: hidden;
+              // text-overflow: ellipsis;
+            }
+          }
+        }
+
+        .detailArrow {
+          width: 12px;
+          box-sizing: border-box;
+          padding: 5px 0px;
+          margin-left: 10px;
+          transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          > img {
+            width: 100%;
+          }
+        }
+      }
+      .contentText{
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: 400;
+        font-size: 14px;
+        color: #4B5563;
+        line-height: 23px;
+      }
+    }
+  }
 }

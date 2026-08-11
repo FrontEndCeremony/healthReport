@@ -63,7 +63,19 @@ export default function ReportDetail() {
                     const data = res.data;
                     setCheckTime(data.checkTime) // 设置检测时间
                     setPatientInfo(data.patientInfo) // 设置患者信息
-                    setComprehensiveAnalysis(data.comprehensiveAnalysis) // 设置中医健康评估
+                    setComprehensiveAnalysis({
+                        ...data.comprehensiveAnalysis,
+                        comprehensive_result:data.comprehensive_result,
+                        health_risk: data.health_risk.map( (item,index) =>{
+                            return {
+                                risk_type: item.risk_type,
+                                risk_detail: item.risk_detail,
+                                id: index,
+                                open: false
+                            }
+                        }),
+                        condition_suggestion:data.condition_suggestion,
+                    }) // 设置中医健康评估
                     setTongueEvaluation(data.tongueEvaluation) // 设置舌像评估
                     setPulseConditionEvaluation(data.pulseConditionEvaluation) // 设置脉搏评估评估
                     setPhysicalFitnessAnalysis(data.physicalFitnessAnalysis) // 【修复】必须把接口的体质数据存入 state

@@ -92,5 +92,10 @@
   "shi_re_zhi": "湿热质",
   "xue_yu_zhi": "血瘀质",
   "qi_yu_zhi": "气郁质",
-  "te_bing_zhi": "特禀质"
+  "te_bing_zhi": "特禀质",
+  "compNoResult": "由于缺少必要的身体信息，暂无整体评估",
+  "compHealthRisk": "健康风险",
+  "compCollapse": "收起",
+  "compExpand": "展开",
+  "constNextStep": "下一步调理建议"
 }
