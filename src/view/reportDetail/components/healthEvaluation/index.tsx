@@ -9,13 +9,42 @@ import sureIcon from '@/assets/sure_icon.png'
 import down_arrow from '@/assets/down_arrow.png'
 import notIcon from '@/assets/notIcon.png'
 import shouldIcon from '@/assets/shouldIcon.png'
-import { useState } from 'react'
-export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
+import { useState, useEffect } from 'react'
+interface HealthEvaluationProps {
+  comprehensiveAnalysis?: any;
+  forceExpand?: boolean; // 是否强制展开所有内容
+}
+
+export default function HealthEvaluation({ comprehensiveAnalysis = {}, forceExpand = false }: HealthEvaluationProps) {
   const { t } = useTranslation();
   const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, comprehensiveDescription = '', healthRisk = '', comprehensive_result = [] , health_risk = [], condition_suggestion = {} } = comprehensiveAnalysis || {}
 
   // 记录展开的项的ID
-    const [expandedItemIds, setExpandedItemIds] = useState<number[]>([]);
+  const [expandedItemIds, setExpandedItemIds] = useState<number[]>([]);
+
+  // 下一步建议，展开收起
+  const [suggestShow, setSuggestShow] = useState(false);
+
+  // 记录打开的下一步建议的id
+  const [suggestOpenId, setSuggestOpenId] = useState<number[]>([]);
+
+    // 当 forceExpand 变化时，自动展开或收起所有项
+    useEffect(() => {
+      if (forceExpand) {
+        // 展开所有健康风险项
+        const allRiskIds = health_risk.map((item: any) => item.id);
+        setExpandedItemIds(allRiskIds);
+        setSuggestShow(true);
+        // 展开所有下一步调理建议
+        const allSuggestIds = condition_suggestion?.scheme?.map((_: any, index: number) => index) || [];
+        setSuggestOpenId(allSuggestIds);
+      } else {
+        // 恢复默认折叠状态
+        setExpandedItemIds([]);
+        setSuggestShow(false);
+        setSuggestOpenId([]);
+      }
+    }, [forceExpand, health_risk, condition_suggestion]);
 
      // 打开详情
     const openDetail = (id: number) => {
@@ -56,13 +85,6 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: any) {
       if (avoidArr.length > 0) result.push(avoidArr[0]);
       return result;
     }
-    // 下一步建议，展开收起
-    const [suggestShow, setSuggestShow] = useState(false);
-
-    // 记录打开的下一步建议的id
-
-    const [suggestOpenId, setSuggestOpenId] = useState<number[]>([]);
-
 
     const suggestDetail = (id: number) => { 
       setSuggestOpenId(prev => {
