@@ -97,5 +97,11 @@
   "compHealthRisk": "健康风险",
   "compCollapse": "收起",
   "compExpand": "展开",
-  "constNextStep": "下一步调理建议"
+  "constNextStep": "下一步调理建议",
+  "practice_usage": "做法用量：",
+  "important_reminder": "重要提醒：",
+  "frequency": "频率：",
+  "contraindication": "禁忌：",
+  "no_tongue_data": "暂未获取舌面数据",
+  "no_pulse_data": "暂未获取脉象数据"
 }

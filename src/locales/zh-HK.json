@@ -95,7 +95,13 @@
   "te_bing_zhi": "特稟質",
   "compNoResult": "由於缺少必要的身體信息，暫無整體評估",
   "compHealthRisk": "健康風險",
-   "compCollapse": "收起",
-   "compExpand": "展開",
-   "constNextStep": "下一步調理建議"
+  "compCollapse": "收起",
+  "compExpand": "展開",
+  "constNextStep": "下一步調理建議",
+  "practice_usage": "做法用量：",
+  "important_reminder": "重要提醒：",
+  "frequency": "頻率：",
+  "contraindication": "禁忌：",
+  "no_tongue_data": "暫未獲取舌面數據",
+  "no_pulse_data": "暫未獲取脈象數據"
 }

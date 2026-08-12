@@ -26,7 +26,7 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
             <div className={style.noDataImg}>
               <img src={noData} />
             </div>
-            <div className={style.noDataText}>暂未获取舌面数据</div>
+            <div className={style.noDataText}>{t("no_tongue_data")}</div>
           </div>
         ) : (
           <div>
@@ -60,9 +60,9 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
               return (
                 <div key={index} className={style.detailModel}>
                   <div className={style.detailTitle}>
-                    {item.characteristics}
+                    { index + 1}
                   </div>
-                  <div className={style.detailText}>{item.description}</div>
+                  <div className={style.detailText}>{item.characteristics}：{item.description}</div>
                 </div>
               );
             })}

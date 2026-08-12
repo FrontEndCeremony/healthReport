@@ -24,7 +24,7 @@ export default function PulseEvaluation({
             <div className={style.noDataImg}>
               <img src={noData} />
             </div>
-            <div className={style.noDataText}>暂未获取脉象数据</div>
+            <div className={style.noDataText}>{t("no_pulse_data")}</div>
           </div>
         ) : (
           <div>

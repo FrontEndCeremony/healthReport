@@ -68,8 +68,13 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                         <div className={style.iconItem}>{item.name}</div>
                                     </div>
                                     <div className={style.recommendationBottom}>
-                                        {t('practice')}{item.practice || ''} <br />
-                                        {t('efficacy')}{item.efficacy || ''}
+                                        {t('practice_usage')}<br />
+                                        {item.practice || ''}<br />
+                                        {t('efficacy')}<br />
+                                        {item.efficacy || ''}<br/>
+                                        {t('important_reminder')}<br />
+                                        · {t('frequency')}{item.consumptionFrequency}<br />
+                                        · {t('contraindication')}{item.contraindicatedGroups}<br />
                                     </div>
                                 </div>
                             )
