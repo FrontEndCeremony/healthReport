@@ -4,63 +4,17 @@ import personImg from "@/assets/person_img.png";
 import { Rate } from "antd";
 import { useTranslation } from "react-i18next";
 import warn from '@/assets/warn.png'
-import back_icon from '@/assets/back_icon.png'
 import sureIcon from '@/assets/sure_icon.png'
-import down_arrow from '@/assets/down_arrow.png'
 import notIcon from '@/assets/notIcon.png'
 import shouldIcon from '@/assets/shouldIcon.png'
-import { useState, useEffect } from 'react'
 interface HealthEvaluationProps {
   comprehensiveAnalysis?: any;
-  forceExpand?: boolean; // 是否强制展开所有内容
 }
 
-export default function HealthEvaluation({ comprehensiveAnalysis = {}, forceExpand = false }: HealthEvaluationProps) {
+export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthEvaluationProps) {
   const { t } = useTranslation();
   const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, comprehensiveDescription = '', healthRisk = '', comprehensive_result = [] , health_risk = [], condition_suggestion = {} } = comprehensiveAnalysis || {}
 
-  // 记录展开的项的ID
-  const [expandedItemIds, setExpandedItemIds] = useState<number[]>([]);
-
-  // 下一步建议，展开收起
-  const [suggestShow, setSuggestShow] = useState(false);
-
-  // 记录打开的下一步建议的id
-  const [suggestOpenId, setSuggestOpenId] = useState<number[]>([]);
-
-    // 当 forceExpand 变化时，自动展开或收起所有项
-    useEffect(() => {
-      if (forceExpand) {
-        // 展开所有健康风险项
-        const allRiskIds = health_risk.map((item: any) => item.id);
-        setExpandedItemIds(allRiskIds);
-        setSuggestShow(true);
-        // 展开所有下一步调理建议
-        const allSuggestIds = condition_suggestion?.scheme?.map((_: any, index: number) => index) || [];
-        setSuggestOpenId(allSuggestIds);
-      } else {
-        // 恢复默认折叠状态
-        setExpandedItemIds([]);
-        setSuggestShow(false);
-        setSuggestOpenId([]);
-      }
-    }, [forceExpand, health_risk, condition_suggestion]);
-
-     // 打开详情
-    const openDetail = (id: number) => {
-        setExpandedItemIds(prev => {
-            if (prev.includes(id)) {
-                return prev.filter(item => item !== id);
-            } else {
-                return [...prev, id];
-            }
-        });
-    }
-
-    // 点击展开收起
-    const suggestMore = () =>{
-      setSuggestShow(!suggestShow)
-    };
     // 数据排序
     const suggestArr = () => {
       const showArr = condition_suggestion?.scheme.map((item,index) =>{
@@ -74,27 +28,10 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {}, forceExpa
       const shouldArr = showArr.filter(item => item.type === '宜');
       const avoidArr = showArr.filter(item => item.type === '忌');
 
-      if (suggestShow) {
-        // 展开状态：展示全部，"宜"在前，"忌"在后
-        return [...shouldArr, ...avoidArr];
-      }
-
-      // 收起状态：只展示两条（第一个"宜"和第一个"忌"）
-      const result = [];
-      if (shouldArr.length > 0) result.push(shouldArr[0]);
-      if (avoidArr.length > 0) result.push(avoidArr[0]);
-      return result;
+      // 展示全部，"宜"在前，"忌"在后
+      return [...shouldArr, ...avoidArr];
     }
 
-    const suggestDetail = (id: number) => { 
-      setSuggestOpenId(prev => {
-        if (prev.includes(id)) {
-            return prev.filter(item => item !== id);
-        } else {
-            return [...prev, id];
-        }
-    });
-    }
   return (
     <>
       <BaseModel title={t('health_evaluation')}>
@@ -162,17 +99,13 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {}, forceExpa
             </div>
             {
                 health_risk.map((item, index) => {
-                    const isOpen = expandedItemIds.includes(item.id);
                     return (
-                        <div className={style.riskDetail} key={index} onClick={() => { openDetail(item.id) }}>
-                            <div className={style.tagDetail} style={isOpen ? {} : { display: 'flex', alignItems: 'center' }}>
-                                <span className={style.tagType} style={isOpen ? { padding: '3px 10px' } : { padding: '3px 10px' }}>{item.risk_type}</span>
-                                <span className={style.tagContent} style={isOpen ? {} : { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', }}>
+                        <div className={style.riskDetail} key={index}>
+                            <div className={style.tagDetail}>
+                                <span className={style.tagType}>{item.risk_type}</span>
+                                <span className={style.tagContent}>
                                     {item.risk_detail}
                                 </span>
-                            </div>
-                            <div className={style.tagArrow} style={isOpen ? { transform: 'rotate(-90deg)',marginTop: '10px' } : { transform: 'rotate(-180deg)', marginTop: '15px' }} >
-                                <img src={back_icon} alt="arrow" />
                             </div>
                         </div>
                     )
@@ -187,37 +120,27 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {}, forceExpa
                   </div>
                   <div className={style.tipText}>{t('constNextStep')}</div>
                 </div>
-                <div className={style.moreIcon} onClick={suggestMore}>
-                  <div>{suggestShow ? t('compCollapse') : t('compExpand')}</div>
-                  <div className={style.downIcon} style={ suggestShow ? { transform: 'rotate(0deg)' } : { transform: 'rotate(-90deg)' }}>
-                    <img src={down_arrow}/>
-                  </div>
-                </div>
             </div>
             <div className={style.tipSubTitle}>
                 {condition_suggestion?.suggest || t('result.constNoSuggest')}
             </div>
             <div className={style.bottomSuggest}>
                 { suggestArr().length > 0 && suggestArr().map((item,index) =>{
-                  const suggestOpen = suggestOpenId.includes(item.id);
                   return (
                     <div className={style.suggestItem} key={index}>
-                      <div className={style.detailTip} onClick={ () =>{ suggestDetail(item.id) }  }>
+                      <div className={style.detailTip}>
                           <div className={style.leftContent}>
                               <div className={style.detailTipTitle}>
                                   <div className={ item.type == '忌' ? style.typeIconNone : style.typeIcon}>
                                       <img src={ item.type == '忌' ? notIcon : shouldIcon} alt="" />
                                   </div>
-                                  <div className={style.typeText} style={ suggestOpen ? { } : { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}  }>
+                                  <div className={style.typeText}>
                                       {item.tag}
                                   </div>
                               </div>
                           </div>
-                          <div className={style.detailArrow} style={suggestOpen ? { transform: 'rotate(-90deg)' } : { transform: 'rotate(-180deg)' }}>
-                              <img src={back_icon} alt="arrow" />
-                          </div>
                       </div>
-                      <div className={style.contentText} style={ suggestOpen ? {} : {whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{item.content}</div>
+                      <div className={style.contentText}>{item.content}</div>
                     </div>
                   )
                 })}

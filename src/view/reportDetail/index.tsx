@@ -50,7 +50,6 @@ export default function ReportDetail() {
 
     const [isExporting, setIsExporting] = useState(false) // 导出加载状态
     const [exportImgUrl, setExportImgUrl] = useState<string | null>(null) // 生成的长图URL
-    const [forceExpand, setForceExpand] = useState(false) // 控制导出时是否强制展开所有内容
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
@@ -126,19 +125,11 @@ export default function ReportDetail() {
 
     const handleExport = async () => {
         setIsExporting(true);
-        // 展开所有折叠内容
-        setForceExpand(true);
-
-        // 等待 DOM 更新后再生成图片
-        setTimeout(async () => {
-            const imgData = await exportImage('report-content');
-            if (imgData) {
-                setExportImgUrl(imgData);
-            }
-            // 恢复折叠状态
-            setForceExpand(false);
-            setIsExporting(false);
-        }, 300); // 300ms 延迟确保 DOM 更新完成
+        const imgData = await exportImage('report-content');
+        if (imgData) {
+            setExportImgUrl(imgData);
+        }
+        setIsExporting(false);
     };
 
     const handleCloseModal = () => {
@@ -151,7 +142,7 @@ export default function ReportDetail() {
                 <img src={langue === 'HK' ? headerHK : header} />
             </div>
             <UserInformation patientInfo={patientInfo}></UserInformation>
-            <HealthEvaluation comprehensiveAnalysis={comprehensiveAnalysis} forceExpand={forceExpand}></HealthEvaluation>
+            <HealthEvaluation comprehensiveAnalysis={comprehensiveAnalysis}></HealthEvaluation>
             <Tongue tongueEvaluation={tongueEvaluation}></Tongue>
             <PulseEvaluation pulseConditionEvaluation={pulseConditionEvaluation}></PulseEvaluation>
             <PhysicalFitness physicalFitnessAnalysis={physicalFitnessAnalysis}></PhysicalFitness>
