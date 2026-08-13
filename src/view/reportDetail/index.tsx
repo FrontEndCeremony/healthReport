@@ -66,7 +66,7 @@ export default function ReportDetail() {
                     setComprehensiveAnalysis({
                         ...data.comprehensiveAnalysis,
                         comprehensive_result:data.comprehensive_result,
-                        health_risk: data.health_risk.map( (item,index) =>{
+                        health_risk: data.health_risk.map( (item: any, index: number) =>{
                             return {
                                 risk_type: item.risk_type,
                                 risk_detail: item.risk_detail,

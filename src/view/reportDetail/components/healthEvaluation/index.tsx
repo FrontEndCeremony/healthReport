@@ -17,7 +17,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
 
     // 数据排序
     const suggestArr = () => {
-      const showArr = condition_suggestion?.scheme.map((item,index) =>{
+      const showArr = condition_suggestion?.scheme.map((item: any, index: number) =>{
         return {
           ...item,
           id: index
@@ -25,8 +25,8 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
       }) || [];
       if (showArr.length === 0) return [];
 
-      const shouldArr = showArr.filter(item => item.type === '宜');
-      const avoidArr = showArr.filter(item => item.type === '忌');
+      const shouldArr = showArr.filter((item: any) => item.type === '宜');
+      const avoidArr = showArr.filter((item: any) => item.type === '忌');
 
       // 展示全部，"宜"在前，"忌"在后
       return [...shouldArr, ...avoidArr];
@@ -81,7 +81,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
            &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '健康' ? { color: '#7CD334'} : (healthRisk == '中风险'  || healthRisk == '轻微风险') ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
         </div>
         <div className={style.resultDetail}>
-            {comprehensive_result.length > 0 ? comprehensive_result.map((item, index) => (
+            {comprehensive_result.length > 0 ? comprehensive_result.map((item: any, index: number) => (
                 <div key={index} className={style.resultItem}>{item}</div>
             )) : <div className={style.noResult}>
                 {t('compNoResult')}
@@ -98,7 +98,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                 </div>
             </div>
             {
-                health_risk.map((item, index) => {
+                health_risk.map((item: any, index: number) => {
                     return (
                         <div className={style.riskDetail} key={index}>
                             <div className={style.tagDetail}>
@@ -125,7 +125,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                 {condition_suggestion?.suggest || t('result.constNoSuggest')}
             </div>
             <div className={style.bottomSuggest}>
-                { suggestArr().length > 0 && suggestArr().map((item,index) =>{
+                { suggestArr().length > 0 && suggestArr().map((item: any, index: number) =>{
                   return (
                     <div className={style.suggestItem} key={index}>
                       <div className={style.detailTip}>

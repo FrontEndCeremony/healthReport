@@ -69,7 +69,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                            {t('avoid_foods')}
                         </div>
                         <div className={style.recommendationBottom}>
-                            { dietConditioningScheme?.avoidedFoods.map((item,index) =>{
+                            { dietConditioningScheme?.avoidedFoods.map((item: any, index: number) =>{
                                 return (
                                     <div className={style.recommendationItem} key={index}>
                                         <div className={style.recommendationTipTitle}>
@@ -213,7 +213,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
 
                     <div className={style.sportGuide}>
                         <div>{t('recommended_sports')}</div>
-                        {sportsGuidance?.sportsPlan?.map((item,index) =>{
+                        {sportsGuidance?.sportsPlan?.map((item: any, index: number) =>{
                             return (
                                 <div key={index} className={style.sportGuideTitle}>
                                     <div className={style.sportGuideIcon}>{index + 1}</div>
@@ -224,7 +224,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     </div>
                     <div className={style.sportGuide}>
                         <div>{t('non_recommended_sports')}</div>
-                        {sportsGuidance?.nonRecommendedSports?.map((item,index) =>{
+                        {sportsGuidance?.nonRecommendedSports?.map((item: any, index: number) =>{
                             return (
                                 <div key={index} className={style.sportGuideTitle}>
                                     <div className={style.sportGuideIcon}>{index + 1}</div>
@@ -248,7 +248,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     </div>
                     <div className={style.stepText}>
                         <div>{t('recommendations')}</div>
-                        { lifestyleConditioningScheme?.recommendations?.map((item,index) =>{
+                        { lifestyleConditioningScheme?.recommendations?.map((item: any, index: number) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
                                     <div className={style.dataIcon}>{index + 1}</div>
@@ -261,7 +261,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
 
                     <div className={style.stepText}>
                         <div>{t('avoid')}</div>
-                        { lifestyleConditioningScheme?.nonRecommendations?.map((item,index) =>{
+                        { lifestyleConditioningScheme?.nonRecommendations?.map((item: any, index: number) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
                                     <div className={style.dataIcon}>{index + 1}</div>
@@ -272,7 +272,14 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     </div>
                     <div className={style.stepText}>
                         <div style={{ color:'#64748B'}}>{t('precautions_label')}</div>
-                        { lifestyleConditioningScheme?.contraindications?.map((item,index) =>{
+                        { lifestyleConditioningScheme?.contraindications?.map((item: any, index: number) =>{
+                            return (
+                                <div className={style.dataItem} key={index}>
+                                    · {item}
+                                </div>
+                            )
+                        })}
+                        { lifestyleConditioningScheme?.contraindicatedGroups?.map((item: any, index: number) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
                                     · {item}
@@ -281,7 +288,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                     </div>
                     <div className={style.lifeTip}>
-                        {lifestyleConditioningScheme.genderNotes}
+                        {t('remark_label')}{lifestyleConditioningScheme.genderNotes}
                     </div>
                 </div>
                 <div className={style.stepContent}>
