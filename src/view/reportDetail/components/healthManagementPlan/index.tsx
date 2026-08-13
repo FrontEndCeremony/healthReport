@@ -55,10 +55,10 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                         <div className={style.titleIcon}>{index + 1}</div>
                                         <div>.{item.name}: {item.efficacy}</div>
                                     </div>
-                                    <div>性味：{item.natureAndFlavor}</div>
-                                    <div>归经：{item.meridianTropism}</div>
-                                    <div>每日建议用量：{item.dailyRecommendedDosage}</div>
-                                    <div>注意：{item.precautions}</div>
+                                    <div>{t('nature_and_flavor')}{item.natureAndFlavor}</div>
+                                    <div>{t('meridian_tropism')}{item.meridianTropism}</div>
+                                    <div>{t('daily_dosage')}{item.dailyRecommendedDosage}</div>
+                                    <div>{t('precautions_label_short')}{item.precautions}</div>
                                 </div>
                             )
                         })}
@@ -66,7 +66,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.recommendation}>
                         <div className={style.recommendationTitle}>
-                           注意避免的食物
+                           {t('avoid_foods')}
                         </div>
                         <div className={style.recommendationBottom}>
                             { dietConditioningScheme?.avoidedFoods.map((item,index) =>{
@@ -124,11 +124,11 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                     <div className={`${style.stepInnerTitle} ${style.textColor1}`}>{index + 1}.{item.acupuncturePoint}</div>
                                     <div>{item.location || ''}，{item.operation || ''}</div>
                                     <div className={style.stepBottomItem}>
-                                        <span style={{fontWeight:'bold'}}>核心功效：</span><br/>
+                                        <span style={{fontWeight:'bold'}}>{t('core_efficacy')}</span><br/>
                                         {item.efficacy}
                                     </div>
                                     <div className={style.stepBottomItem}>
-                                        <span style={{fontWeight:'bold'}}>关键点：</span><br/>
+                                        <span style={{fontWeight:'bold'}}>{t('key_points')}</span><br/>
                                         {item.contraindicatedAreas}
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })
                     }
                     <div className={style.noticeModel}>
-                        <div style={{fontWeight:'bold'}}>注意事项：</div>
+                        <div style={{fontWeight:'bold'}}>{t('precautions_label')}</div>
                         <div>{physicalTherapyProgram?.acupointPattersNeedAttention || '--'}</div>
                     </div>
                 </div>
@@ -161,11 +161,11 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                         </div>
                                     </div>
                                     <div className={style.stepText}>
-                                        <div>用量：<br/>{item.form || ''}</div>
-                                        <div>操作：<br/>{item.operation || ''}</div>
-                                        <div>重要提醒：<br/>
-                                            · 频率：{item.frequency}<br/>
-                                            · 禁忌：{item.contraindications}<br/>
+                                        <div>{t('dosage')}<br/>{item.form || ''}</div>
+                                        <div>{t('operation_label')}<br/>{item.operation || ''}</div>
+                                        <div>{t('important_reminder_label')}<br/>
+                                            · {t('frequency')}{item.frequency}<br/>
+                                            · {t('contraindication')}{item.contraindications}<br/>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })
                     }
                     <div className={style.noticeModel}>
-                        <div style={{fontWeight:'bold'}}>注意事项：</div>
+                        <div style={{fontWeight:'bold'}}>{t('precautions_label')}</div>
                         <div>{footBathGuidance?.footBathPattersNeedAttention || ''}</div>
                     </div>
                 </div>
@@ -193,8 +193,8 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             <div className={`${style.stepdetail} ${style.contentBack5}`} key={index}>
                                 <div className={`${style.stepInnerTitle} ${style.textColor3}`}>{index + 1}.{item.name}</div>
                                 <div>{item.operation || ''}</div>
-                                <div style={{marginTop:'5px'}}>核心功效：<br/>{item.efficacy}</div>
-                                <div style={{marginTop:'5px'}}>频率建议：<br/>{item.frequency}</div>
+                                <div style={{marginTop:'5px'}}>{t('core_efficacy')}<br/>{item.efficacy}</div>
+                                <div style={{marginTop:'5px'}}>{t('frequency_suggestion')}<br/>{item.frequency}</div>
                             </div>
                         )
                     })}
@@ -212,7 +212,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     </div>
 
                     <div className={style.sportGuide}>
-                        <div>推荐运动:</div>
+                        <div>{t('recommended_sports')}</div>
                         {sportsGuidance?.sportsPlan?.map((item,index) =>{
                             return (
                                 <div key={index} className={style.sportGuideTitle}>
@@ -223,7 +223,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                     </div>
                     <div className={style.sportGuide}>
-                        <div>不推荐运动:</div>
+                        <div>{t('non_recommended_sports')}</div>
                         {sportsGuidance?.nonRecommendedSports?.map((item,index) =>{
                             return (
                                 <div key={index} className={style.sportGuideTitle}>
@@ -235,7 +235,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     </div>
 
                     <div className={style.stepText}>
-                        注意事项：<br/>
+                        {t('note_label')}<br/>
                         {sportsGuidance.sportsPattersNeedAttention}
                     </div>
                 </div>
@@ -243,11 +243,11 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                     <div className={style.stepTitle}>
                         <div className={`${style.titleLeft} ${style.back8}`}></div>
                         <div className={style.titleRight}>
-                            生活调理方案
+                            {t('lifestyle_conditioning')}
                         </div>
                     </div>
                     <div className={style.stepText}>
-                        <div>建议：</div>
+                        <div>{t('recommendations')}</div>
                         { lifestyleConditioningScheme?.recommendations?.map((item,index) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
@@ -258,9 +258,9 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                         
                     </div>
-                    
+
                     <div className={style.stepText}>
-                        <div>避免：</div>
+                        <div>{t('avoid')}</div>
                         { lifestyleConditioningScheme?.nonRecommendations?.map((item,index) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
@@ -271,7 +271,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                     </div>
                     <div className={style.stepText}>
-                        <div style={{ color:'#64748B'}}>注意事项：</div>
+                        <div style={{ color:'#64748B'}}>{t('precautions_label')}</div>
                         { lifestyleConditioningScheme?.contraindications?.map((item,index) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
