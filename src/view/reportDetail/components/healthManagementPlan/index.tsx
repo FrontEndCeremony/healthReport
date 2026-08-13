@@ -53,7 +53,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                 <div key={index} className={style.recommendationItem}>
                                     <div className={style.recommendationTipTitle}>
                                         <div className={style.titleIcon}>{index + 1}</div>
-                                        <div>.{item.name}: {item.efficacy}</div>
+                                        <div>{item.name}: {item.efficacy}</div>
                                     </div>
                                     <div>{t('nature_and_flavor')}{item.natureAndFlavor}</div>
                                     <div>{t('meridian_tropism')}{item.meridianTropism}</div>
@@ -74,7 +74,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                     <div className={style.recommendationItem} key={index}>
                                         <div className={style.recommendationTipTitle}>
                                             <div className={style.titleIcon}>{index + 1}</div>
-                                            <div>.{item}</div>
+                                            <div>{item}</div>
                                         </div>
                                     </div>
                                 )
