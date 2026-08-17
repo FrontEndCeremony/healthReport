@@ -35,6 +35,16 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
   return (
     <>
       <BaseModel title={t('health_evaluation')}>
+      <div className={style.bottomTitle}>{t('comprehensive_evaluation')} 
+           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '健康' ? { color: '#7CD334'} : (healthRisk == '中风险'  || healthRisk == '轻微风险') ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
+        </div>
+        <div className={style.resultDetail}>
+            {comprehensive_result.length > 0 ? comprehensive_result.map((item: any, index: number) => (
+                <div key={index} className={style.resultItem}>{item}</div>
+            )) : <div className={style.noResult}>
+                {t('compNoResult')}
+            </div>}
+        </div>
         <div className={style.starModel}>
           <div className={style.ring}>
             <div className={`${style.cycle} ${style.liverCycle}`}>
@@ -76,16 +86,6 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
               <img src={personImg} alt="" />
             </div>
           </div>
-        </div>
-        <div className={style.bottomTitle}>{t('comprehensive_evaluation')} 
-           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '健康' ? { color: '#7CD334'} : (healthRisk == '中风险'  || healthRisk == '轻微风险') ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
-        </div>
-        <div className={style.resultDetail}>
-            {comprehensive_result.length > 0 ? comprehensive_result.map((item: any, index: number) => (
-                <div key={index} className={style.resultItem}>{item}</div>
-            )) : <div className={style.noResult}>
-                {t('compNoResult')}
-            </div>}
         </div>
         <div className={style.bottomDetail}>{comprehensiveDescription}</div>
         <div className={style.riskResult}>

@@ -4,6 +4,7 @@ import leftHand from "@/assets/leftHand.png";
 import rightHand from "@/assets/rightHand.png";
 import { useTranslation } from "react-i18next";
 import noData from "@/assets/noData.png";
+import tripleEnergizer from "@/assets/tripleEnergizer.svg";
 export default function PulseEvaluation({
   pulseConditionEvaluation = {},
 }: any) {
@@ -154,6 +155,9 @@ export default function PulseEvaluation({
             <div className={style.typeDetail}>
               {t("your_pulse")}&nbsp;
               <span className={style.type}>{comprehensiveResult}</span>
+            </div>
+            <div className={style.tripleEnergizer}>
+              <img src={tripleEnergizer}/>
             </div>
             <div className={style.bottomDetail}>{description}</div>
           </div>

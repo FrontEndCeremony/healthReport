@@ -10,7 +10,7 @@
   "instruction_3": "3.AI生成僅供參考，不能替代醫師診斷，建議您使用本報告2週後進行定期檢查",
   "copyright": "Copyright © 2023-2025 先科集團控股有限公司 版權所有",
   "generate_time": "生成時間：",
-  "patient_info": "患者信息",
+  "patient_info": "用戶信息",
   "gender": "性別",
   "age": "年齡",
   "height": "身高",
@@ -120,5 +120,8 @@
   "meridian_tropism": "歸經：",
   "daily_dosage": "每日建議用量：",
   "precautions_label_short": "注意：",
-  "remark_label": "備註："
+  "remark_label": "備註：",
+  "result": {
+    "constNoSuggest": "暫無調理建議"
+  }
 }

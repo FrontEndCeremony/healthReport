@@ -10,7 +10,7 @@
   "instruction_3": "3.AI生成仅供参考，不能替代医师诊断，建议您使用本报告2周后进行定期检查",
   "copyright": "Copyright © 2023-2025 先科集团控股有限公司 版权所有",
   "generate_time": "生成时间：",
-  "patient_info": "患者信息",
+  "patient_info": "用户信息",
   "gender": "性别",
   "age": "年龄",
   "height": "身高",
@@ -120,5 +120,8 @@
   "meridian_tropism": "归经：",
   "daily_dosage": "每日建议用量：",
   "precautions_label_short": "注意：",
-  "remark_label": "备注："
+  "remark_label": "备注：",
+  "result": {
+    "constNoSuggest": "暂无调理建议"
+  }
 }
