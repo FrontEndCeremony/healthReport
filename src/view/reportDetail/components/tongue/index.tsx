@@ -31,6 +31,23 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
         ) : (
           <div>
             <div className={style.topModel}>
+              <div className={style.tongueIconLeft}>
+                {iconList
+                  .slice(0, Math.ceil(iconList.length / 2))
+                  .map((item: any, index) => {
+                    return (
+                      <div key={index} className={style.iconItem}>
+                        <div>{item.characteristics}</div>
+                        <div className={style.iconImg}>
+                          <img
+                            src={item.isHealthy ? success_img : ward_img}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
               <div
                 className={`${style.tongueImg} pdf-avoid-break-tongue-image`}
               >
@@ -38,11 +55,15 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
                   <img src={tongueImage} alt="" />
                 </div>
               </div>
-              <div className={style.tongueIcon}>
-                {iconList.length > 0 &&
-                  iconList.map((item: any, index) => {
+              <div className={style.tongueIconRight}>
+                {iconList
+                  .slice(Math.ceil(iconList.length / 2))
+                  .map((item: any, index) => {
                     return (
-                      <div key={index} className={style.iconItem}>
+                      <div
+                        key={Math.ceil(iconList.length / 2) + index}
+                        className={style.iconItem}
+                      >
                         <div>{item.characteristics}</div>
                         <div className={style.iconImg}>
                           <img
