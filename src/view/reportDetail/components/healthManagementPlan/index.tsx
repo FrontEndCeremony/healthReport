@@ -1,6 +1,7 @@
 import style from './index.module.less'
 import BaseModel from '../baseModel'
 import { useTranslation } from 'react-i18next';
+import noticeIcon from '@/assets/noticeIcon.png'
 
 export default function HealthManagementPlan({ healthHanagementHlan = {} }: any) {
     const { t } = useTranslation();
@@ -53,7 +54,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                 <div key={index} className={style.recommendationItem}>
                                     <div className={style.recommendationTipTitle}>
                                         <div className={style.titleIcon}>{index + 1}</div>
-                                        <div>{item.name}: {item.efficacy}</div>
+                                        <div style={{ flex:1}}>{item.name}: {item.efficacy}</div>
                                     </div>
                                     <div>{t('nature_and_flavor')}{item.natureAndFlavor}</div>
                                     <div>{t('meridian_tropism')}{item.meridianTropism}</div>
@@ -93,13 +94,20 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                         <div className={style.iconItem}>{item.name}</div>
                                     </div>
                                     <div className={style.recommendationBottom}>
-                                        {t('practice_usage')}<br />
-                                        {item.practice || ''}<br />
-                                        {t('efficacy')}<br />
-                                        {item.efficacy || ''}<br/>
-                                        {t('important_reminder')}<br />
-                                        · {t('frequency')}{item.consumptionFrequency}<br />
-                                        · {t('contraindication')}{item.contraindicatedGroups}<br />
+                                        <div className={style.bottomBorder}>{t('practice_usage')}
+                                            {item.practice || ''}
+                                        </div>
+                                        <div className={style.bottomBorder}>
+                                             {t('efficacy')}
+                                             {item.efficacy || ''}
+                                        </div>
+                                        <div className={style.bottomBorder}>
+                                            {t('important_reminder')}<br />
+                                            · {t('frequency')}{item.consumptionFrequency}<br />
+                                            · {t('contraindication')}{item.contraindicatedGroups}<br />
+                                        </div>
+                                       
+                                        
                                     </div>
                                 </div>
                             )
@@ -137,7 +145,12 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })
                     }
                     <div className={style.noticeModel}>
-                        <div style={{fontWeight:'bold'}}>{t('precautions_label')}</div>
+                        <div className={style.iconImg}>
+                            <div className={style.imgItem}>
+                                <img src={noticeIcon}/>
+                            </div>
+                            {t('precautions_label')}
+                        </div>
                         <div>{physicalTherapyProgram?.acupointPattersNeedAttention || '--'}</div>
                     </div>
                 </div>
@@ -162,9 +175,9 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                                         </div>
                                     </div>
                                     <div className={style.stepText}>
-                                        <div>{t('dosage')}<br/>{item.form || ''}</div>
-                                        <div>{t('operation_label')}<br/>{item.operation || ''}</div>
-                                        <div>{t('important_reminder_label')}<br/>
+                                        <div className={style.footBorder}>{t('dosage')}{item.form || ''}</div>
+                                        <div className={style.footBorder}>{t('operation_label')}{item.operation || ''}</div>
+                                        <div className={style.footBorder}>{t('important_reminder_label')}<br/>
                                             · {t('frequency')}{item.frequency}<br/>
                                             · {t('contraindication')}{item.contraindications}<br/>
                                         </div>
@@ -173,8 +186,13 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             )
                         })
                     }
-                    <div className={style.noticeModel}>
-                        <div style={{fontWeight:'bold'}}>{t('precautions_label')}</div>
+                   <div className={style.noticeModel}>
+                        <div className={style.iconImg}>
+                            <div className={style.imgItem}>
+                                <img src={noticeIcon}/>
+                            </div>
+                            {t('precautions_label')}
+                        </div>
                         <div>{footBathGuidance?.footBathPattersNeedAttention || ''}</div>
                     </div>
                 </div>
@@ -234,10 +252,14 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             )
                         })}
                     </div>
-
-                    <div className={style.stepText}>
-                        {t('note_label')}<br/>
-                        {sportsGuidance.sportsPattersNeedAttention}
+                     <div className={style.noticeModel}>
+                        <div className={style.iconImg}>
+                            <div className={style.imgItem}>
+                                <img src={noticeIcon}/>
+                            </div>
+                            {t('precautions_label')}
+                        </div>
+                        <div>{sportsGuidance.sportsPattersNeedAttention || ''}</div>
                     </div>
                 </div>
                 <div className={style.stepContent}>
@@ -253,7 +275,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             return (
                                 <div className={style.dataItem} key={index}>
                                     <div className={style.dataIcon}>{index + 1}</div>
-                                    <div>{item}</div>
+                                    <div style={{ flex:1 }}>{item}</div>
                                 </div>
                             )
                         })}
@@ -271,16 +293,14 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             )
                         })}
                     </div>
-                    <div className={style.stepText}>
-                        <div style={{ color:'#64748B'}}>{t('precautions_label')}</div>
-                        { lifestyleConditioningScheme?.contraindications?.map((item: any, index: number) =>{
-                            return (
-                                <div className={style.dataItem} key={index}>
-                                    · {item}
-                                </div>
-                            )
-                        })}
-                        { lifestyleConditioningScheme?.contraindicatedGroups?.map((item: any, index: number) =>{
+                    <div className={style.noticeModel}>
+                        <div className={style.iconImg}>
+                            <div className={style.imgItem}>
+                                <img src={noticeIcon}/>
+                            </div>
+                            {t('precautions_label')}
+                        </div>
+                         { lifestyleConditioningScheme?.contraindicatedGroups?.map((item: any, index: number) =>{
                             return (
                                 <div className={style.dataItem} key={index}>
                                     · {item}

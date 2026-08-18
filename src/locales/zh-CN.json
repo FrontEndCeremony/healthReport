@@ -142,5 +142,12 @@
     "slight_risk": "轻微风险",
     "medium_risk": "中风险",
     "high_risk": "高风险"
-  }
+  },
+  "not_provided": "未提供",
+  "unit_cm": "cm",
+  "unit_kg": "kg",
+  "bmi_label": "BMI",
+  "recommend_type_should": "宜",
+  "recommend_type_avoid": "忌",
+  "route_instruction": "请通过 /report/:id 访问指定报告"
 }

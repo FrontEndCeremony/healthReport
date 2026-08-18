@@ -54,8 +54,8 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
       }) || [];
       if (showArr.length === 0) return [];
 
-      const shouldArr = showArr.filter((item: any) => item.type === '宜');
-      const avoidArr = showArr.filter((item: any) => item.type === '忌');
+      const shouldArr = showArr.filter((item: any) => item.type === t('recommend_type_should'));
+      const avoidArr = showArr.filter((item: any) => item.type === t('recommend_type_avoid'));
 
       // 展示全部，"宜"在前，"忌"在后
       return [...shouldArr, ...avoidArr];
@@ -258,8 +258,8 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                       <div className={style.detailTip}>
                           <div className={style.leftContent}>
                               <div className={style.detailTipTitle}>
-                                  <div className={ item.type == '忌' ? style.typeIconNone : style.typeIcon}>
-                                      <img src={ item.type == '忌' ? notIcon : shouldIcon} alt="" />
+                                  <div className={ item.type == t('recommend_type_avoid') ? style.typeIconNone : style.typeIcon}>
+                                      <img src={ item.type == t('recommend_type_avoid') ? notIcon : shouldIcon} alt="" />
                                   </div>
                                   <div className={style.typeText}>
                                       {item.tag}
