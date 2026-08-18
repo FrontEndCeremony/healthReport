@@ -115,7 +115,8 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         </div>
                     </div>
                     <div className={style.stepText}>
-                        {physicalTherapyProgram?.description || ''}{t('acupoint_recommendation')}
+                        {t('tcm_physiotherapy_desc')}
+                        <br/>{t('acupoint_recommendation')}
                     </div>
                     {
                         physicalTherapyProgram?.acupointTherapy?.map((item: any, index: number) => {

@@ -121,6 +121,7 @@
   "daily_dosage": "每日建议用量：",
   "precautions_label_short": "注意：",
   "remark_label": "备注：",
+  "tcm_physiotherapy_desc": "中医理疗是以中医理论为基础，通过非药物手段调节人体气血、经络和脏腑功能，达到预防疾病、缓解症状、促进康复目的的一类传统疗法。其核心在于通过物理刺激或自然疗法，恢复机体阴阳平衡，提升自愈能力。",
   "result": {
     "constNoSuggest": "暂无调理建议"
   }

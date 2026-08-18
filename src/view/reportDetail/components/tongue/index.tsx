@@ -59,9 +59,9 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
             {tongueCharacteristics?.map((item: any, index: number) => {
               return (
                 <div key={index} className={style.detailModel}>
-                  <div className={style.detailTitle}>
+                  {/* <div className={style.detailTitle}>
                     { index + 1}
-                  </div>
+                  </div> */}
                   <div className={style.detailText}>{item.characteristics}：{item.description}</div>
                 </div>
               );

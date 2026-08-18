@@ -121,6 +121,7 @@
   "daily_dosage": "每日建議用量：",
   "precautions_label_short": "注意：",
   "remark_label": "備註：",
+  "tcm_physiotherapy_desc": "中醫理療是以中醫理論為基礎，通過非藥物手段調節人體氣血、經絡和臟腑功能，達到預防疾病、緩解症狀、促進康復目的的一類傳統療法。其核心在於通過物理刺激或自然療法，恢復機體陰陽平衡，提升自癒能力。",
   "result": {
     "constNoSuggest": "暫無調理建議"
   }
