@@ -7,6 +7,8 @@ import warn from '@/assets/warn.png'
 import sureIcon from '@/assets/sure_icon.png'
 import notIcon from '@/assets/notIcon.png'
 import shouldIcon from '@/assets/shouldIcon.png'
+import type { number } from "react-i18next/icu.macro";
+import { useState, useEffect } from "react";
 interface HealthEvaluationProps {
   comprehensiveAnalysis?: any;
 }
@@ -14,6 +16,33 @@ interface HealthEvaluationProps {
 export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthEvaluationProps) {
   const { t } = useTranslation();
   const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, comprehensiveDescription = '', healthRisk = '', comprehensive_result = [] , health_risk = [], condition_suggestion = {} } = comprehensiveAnalysis || {}
+
+  // 动画相关状态
+  const [animatedScores, setAnimatedScores] = useState({
+    lungs: 0,
+    renal: 0,
+    heart: 0,
+    liver: 0,
+    spleen: 0
+  });
+
+  // 触发动画 - 按照器官顺序依次增长
+  useEffect(() => {
+    // 先重置所有值为0
+    setAnimatedScores({ lungs: 0, renal: 0, heart: 0, liver: 0, spleen: 0 });
+
+    const organs = ['lungs', 'renal', 'heart', 'liver', 'spleen'] as const;
+    const scores = { lungs: lungsScore, renal: renalScore, heart: heartScore, liver: liverScore, spleen: spleenScore };
+
+    organs.forEach((organ, index) => {
+      setTimeout(() => {
+        setAnimatedScores(prev => ({
+          ...prev,
+          [organ]: scores[organ]
+        }));
+      }, index * 150); // 每个器官间隔150ms
+    });
+  }, [lungsScore, renalScore, heartScore, liverScore, spleenScore]);
 
     // 数据排序
     const suggestArr = () => {
@@ -32,11 +61,37 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
       return [...shouldArr, ...avoidArr];
     }
 
+     const getOrganStyle = (score:number) => {
+        if (score > 66) {
+            return {
+                back: '#52C41A',
+                num: score,
+                value: t('score_level.good')
+            }
+        } else if (score > 33) {
+            return {
+                back: '#FAAD14',
+                num: score,
+                value: t('score_level.weak')
+            }
+        } else {
+            return {
+                back: '#FF4D4F',
+                num: score,
+                value: t('score_level.insufficient')
+            }
+        }
+    }
+
   return (
     <>
       <BaseModel title={t('health_evaluation')}>
-      <div className={style.bottomTitle}>{t('comprehensive_evaluation')} 
-           &nbsp; &nbsp;<span className={style.levelText} style={ healthRisk == '健康' ? { color: '#7CD334'} : (healthRisk == '中风险'  || healthRisk == '轻微风险') ? { color:'#FAAD14'} : {color:'#FF4D4F'}}>{ healthRisk }</span>
+      <div className={style.bottomTitle}>{t('comprehensive_evaluation')}
+           &nbsp; &nbsp;<span className={style.levelText} style={
+             healthRisk === t('health_risk_level.health') ? { color: '#7CD334'} :
+             (healthRisk === t('health_risk_level.medium_risk') || healthRisk === t('health_risk_level.slight_risk')) ? { color:'#FAAD14'} :
+             {color:'#FF4D4F'}
+           }>{ healthRisk }</span>
         </div>
         <div className={style.resultDetail}>
             {comprehensive_result.length > 0 ? comprehensive_result.map((item: any, index: number) => (
@@ -45,7 +100,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                 {t('compNoResult')}
             </div>}
         </div>
-        <div className={style.starModel}>
+        {/* <div className={style.starModel}>
           <div className={style.ring}>
             <div className={`${style.cycle} ${style.liverCycle}`}>
               <div className={`${style.star} ${style.customRate}`}>
@@ -85,6 +140,78 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
             <div className={style.personImg}>
               <img src={personImg} alt="" />
             </div>
+          </div>
+        </div> */}
+        <div className={style.organDetail}>
+          <div className={style.organItem}>
+            <div className={style.organLabel}>{t('organ_status.lung_large_intestine')}</div>
+            <div className={style.organLine}>
+                <div
+                    className={style.organLineInner}
+                    style={{
+                        background: getOrganStyle(animatedScores.lungs).back,
+                        width: `${getOrganStyle(animatedScores.lungs).num}%`,
+                        transition: 'width 0.8s ease-out'
+                    }}
+                ></div>
+            </div>
+            <div className={style.organValue} style={{color:getOrganStyle(lungsScore).back}}>{getOrganStyle(lungsScore).value}</div>
+          </div>
+          <div className={style.organItem}>
+            <div className={style.organLabel}>{t('organ_status.kidney_bladder')}</div>
+            <div className={style.organLine}>
+                <div
+                    className={style.organLineInner}
+                    style={{
+                        background: getOrganStyle(animatedScores.renal).back,
+                        width: `${getOrganStyle(animatedScores.renal).num}%`,
+                        transition: 'width 0.8s ease-out'
+                    }}
+                ></div>
+            </div>
+            <div className={style.organValue} style={{color:getOrganStyle(renalScore).back}}>{getOrganStyle(renalScore).value}</div>
+          </div>
+          <div className={style.organItem}>
+            <div className={style.organLabel}>{t('organ_status.heart_small_intestine')}</div>
+            <div className={style.organLine}>
+                <div
+                    className={style.organLineInner}
+                    style={{
+                        background: getOrganStyle(animatedScores.heart).back,
+                        width: `${getOrganStyle(animatedScores.heart).num}%`,
+                        transition: 'width 0.8s ease-out'
+                    }}
+                ></div>
+            </div>
+            <div className={style.organValue} style={{color:getOrganStyle(heartScore).back}}>{getOrganStyle(heartScore).value}</div>
+          </div>
+          <div className={style.organItem}>
+            <div className={style.organLabel}>{t('organ_status.liver_gallbladder')}</div>
+            <div className={style.organLine}>
+                <div
+                    className={style.organLineInner}
+                    style={{
+                        background: getOrganStyle(animatedScores.liver).back,
+                        width: `${getOrganStyle(animatedScores.liver).num}%`,
+                        transition: 'width 0.8s ease-out'
+                    }}
+                ></div>
+            </div>
+            <div className={style.organValue} style={{color:getOrganStyle(liverScore).back}}>{getOrganStyle(liverScore).value}</div>
+          </div>
+          <div className={style.organItem}>
+            <div className={style.organLabel}>{t('organ_status.spleen_stomach')}</div>
+            <div className={style.organLine}>
+                  <div
+                      className={style.organLineInner}
+                      style={{
+                          background: getOrganStyle(animatedScores.spleen).back,
+                          width: `${ getOrganStyle(animatedScores.spleen).num}%`,
+                          transition: 'width 0.8s ease-out'
+                      }}
+                  ></div>
+              </div>
+            <div className={style.organValue} style={{color:getOrganStyle(spleenScore).back}}>{getOrganStyle(spleenScore).value}</div>
           </div>
         </div>
         <div className={style.bottomDetail}>{comprehensiveDescription}</div>

@@ -124,5 +124,23 @@
   "tcm_physiotherapy_desc": "中医理疗是以中医理论为基础，通过非药物手段调节人体气血、经络和脏腑功能，达到预防疾病、缓解症状、促进康复目的的一类传统疗法。其核心在于通过物理刺激或自然疗法，恢复机体阴阳平衡，提升自愈能力。",
   "result": {
     "constNoSuggest": "暂无调理建议"
+  },
+  "organ_status": {
+    "lung_large_intestine": "肺(大肠)",
+    "kidney_bladder": "肾(膀胱)",
+    "heart_small_intestine": "心(小肠)",
+    "liver_gallbladder": "肝(胆)",
+    "spleen_stomach": "脾(胃)"
+  },
+  "score_level": {
+    "good": "良好",
+    "weak": "偏弱",
+    "insufficient": "不足"
+  },
+  "health_risk_level": {
+    "health": "健康",
+    "slight_risk": "轻微风险",
+    "medium_risk": "中风险",
+    "high_risk": "高风险"
   }
 }
