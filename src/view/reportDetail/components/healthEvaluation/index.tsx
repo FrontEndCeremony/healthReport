@@ -1,13 +1,10 @@
 import style from "./index.module.less";
 import BaseModel from "../baseModel";
-import personImg from "@/assets/person_img.png";
-import { Rate } from "antd";
 import { useTranslation } from "react-i18next";
 import warn from '@/assets/warn.png'
 import sureIcon from '@/assets/sure_icon.png'
 import notIcon from '@/assets/notIcon.png'
 import shouldIcon from '@/assets/shouldIcon.png'
-import type { number } from "react-i18next/icu.macro";
 import { useState, useEffect } from "react";
 interface HealthEvaluationProps {
   comprehensiveAnalysis?: any;
