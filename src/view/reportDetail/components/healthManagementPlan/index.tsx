@@ -32,7 +32,10 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         <div className={style.stepInnerTitle}>{dietConditioningScheme?.description || ''}</div>
                         {dietConditioningScheme?.tips?.map((item: any, index: number) => {
                             return (
-                                <div key={index}>{index + 1}.{item}</div>
+                                <div key={index} className={style.tipItem}>
+                                    <span className={style.tipNumber}>{index + 1}.</span>
+                                    <span className={style.tipText}>{item}</span>
+                                </div>
                             )
                         })}
                     </div>

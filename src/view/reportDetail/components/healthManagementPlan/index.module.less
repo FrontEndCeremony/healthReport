@@ -121,6 +121,21 @@
         color: #6B7280;
         line-height: 20px;
         margin-top: 12px;
+        white-space: normal;
+        word-break: break-word;
+        .tipItem{
+            display: flex;
+            align-items: flex-start;
+            line-height: 20px;
+            .tipNumber{
+                flex-shrink: 0;
+                margin-right: 4px;
+            }
+            .tipText{
+                flex: 1;
+                word-break: break-all;
+            }
+        }
         .stepInnerTitle{
             font-family: Source Han Sans CN, Source Han Sans CN;
             font-weight: bold;
