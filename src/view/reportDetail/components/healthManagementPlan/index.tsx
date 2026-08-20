@@ -272,7 +272,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             {t('lifestyle_conditioning')}
                         </div>
                     </div>
-                    <div className={style.stepText}>
+                    <div className={`${style.stepText} ${style.stepBottomBorder}`}>
                         <div>{t('recommendations')}</div>
                         { lifestyleConditioningScheme?.recommendations?.map((item: any, index: number) =>{
                             return (
@@ -285,7 +285,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         
                     </div>
 
-                    <div className={style.stepText}>
+                    <div className={`${style.stepText} ${style.stepBottomBorder}`}>
                         <div>{t('avoid')}</div>
                         { lifestyleConditioningScheme?.nonRecommendations?.map((item: any, index: number) =>{
                             return (
