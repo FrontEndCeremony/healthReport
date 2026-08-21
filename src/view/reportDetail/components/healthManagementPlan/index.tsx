@@ -12,7 +12,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 <div className={style.mainQuest}>{description}</div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back1}`}></div>
+                        <div className={`${style.titleLeft} ${style.back1}`}>01</div>
                         <div className={style.titleRight}>
                             {t('solar_terms_guide')}
                         </div>
@@ -23,7 +23,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back2}`}></div>
+                        <div className={`${style.titleLeft} ${style.back2}`}>02</div>
                         <div className={style.titleRight}>
                             {t('diet_guide')}
                         </div>
@@ -68,18 +68,15 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                     </div>
                 </div>
-                <div className={style.recommendation}>
-                        <div className={style.recommendationTitle}>
+                <div className={style.attentionModel}>
+                        <div className={style.attentionTitle}>
                            {t('avoid_foods')}
                         </div>
-                        <div className={style.recommendationBottom}>
+                        <div className={style.attentionText}>
                             { dietConditioningScheme?.avoidedFoods.map((item: any, index: number) =>{
                                 return (
-                                    <div className={style.recommendationItem} key={index}>
-                                        <div className={style.recommendationTipTitle}>
-                                            <div className={style.titleIcon}>{index + 1}</div>
-                                            <div>{item}</div>
-                                        </div>
+                                    <div  key={index}>
+                                        · &nbsp;{item}
                                     </div>
                                 )
                             })}
@@ -120,7 +117,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back3}`}></div>
+                        <div className={`${style.titleLeft} ${style.back3}`}>03</div>
                         <div className={style.titleRight}>
                             {t('tcm_physiotherapy')}
                         </div>
@@ -159,7 +156,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back4}`}></div>
+                        <div className={`${style.titleLeft} ${style.back4}`}>04</div>
                         <div className={style.titleRight}>
                             {t('foot_bath_guide')}
                         </div>
@@ -201,7 +198,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back5}`}></div>
+                        <div className={`${style.titleLeft} ${style.back5}`}>05</div>
                         <div className={style.titleRight}>
                             {t('tcm_exercises')}
                         </div>
@@ -224,7 +221,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back6}`}></div>
+                        <div className={`${style.titleLeft} ${style.back6}`}>06</div>
                         <div className={style.titleRight}>
                             {t('sports_guide')}
                         </div>
@@ -244,16 +241,15 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             )
                         })}
                     </div>
-                    <div className={style.sportGuide}>
-                        <div>{t('non_recommended_sports')}</div>
-                        {sportsGuidance?.nonRecommendedSports?.map((item: any, index: number) =>{
-                            return (
-                                <div key={index} className={style.sportGuideTitle}>
-                                    <div className={style.sportGuideIcon}>{index + 1}</div>
-                                    <div className={style.sportText}>{item}</div>
-                                </div>
-                            )
-                        })}
+                    <div className={style.attentionModel}>
+                        <div className={style.attentionTitle}>{t('sports_advice_avoid')}</div>
+                        <div className={style.attentionText}>
+                            {sportsGuidance?.nonRecommendedSports?.map((item: any, index: number) =>{
+                                return (
+                                   <div className={style.sportText} key={index}>· {item}</div>
+                                )
+                            })}
+                        </div>
                     </div>
                      <div className={style.noticeModel}>
                         <div className={style.iconImg}>
@@ -267,12 +263,12 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back8}`}></div>
+                        <div className={`${style.titleLeft} ${style.back8}`}>07</div>
                         <div className={style.titleRight}>
                             {t('lifestyle_conditioning')}
                         </div>
                     </div>
-                    <div className={`${style.stepText} ${style.stepBottomBorder}`}>
+                    <div className={`${style.stepText}`}>
                         <div>{t('recommendations')}</div>
                         { lifestyleConditioningScheme?.recommendations?.map((item: any, index: number) =>{
                             return (
@@ -285,16 +281,17 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         
                     </div>
 
-                    <div className={`${style.stepText} ${style.stepBottomBorder}`}>
-                        <div>{t('avoid')}</div>
-                        { lifestyleConditioningScheme?.nonRecommendations?.map((item: any, index: number) =>{
-                            return (
-                                <div className={style.dataItem} key={index}>
-                                    <div className={style.dataIcon}>{index + 1}</div>
-                                    <div>{item}</div>
-                                </div>
-                            )
-                        })}
+                    <div className={style.attentionModel}>
+                        <div className={style.attentionTitle}>{t('avoid')}</div>
+                        <div className={style.attentionText}>
+                            { lifestyleConditioningScheme?.nonRecommendations?.map((item: any, index: number) =>{
+                                return (
+                                    <div key={index}>
+                                        · {item}
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                     <div className={style.noticeModel}>
                         <div className={style.iconImg}>
@@ -317,7 +314,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                 </div>
                 <div className={style.stepContent}>
                     <div className={style.stepTitle}>
-                        <div className={`${style.titleLeft} ${style.back7}`}></div>
+                        <div className={`${style.titleLeft} ${style.back7}`}>08</div>
                         <div className={style.titleRight}>
                             {t('health_knowledge')}
                         </div>

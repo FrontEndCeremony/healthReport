@@ -12,10 +12,18 @@
         display: flex;
         align-items: center;
         .titleLeft{
-            width: 7px;
-            height: 7px;
-            border-radius: 7px 7px 7px 7px;
+            width: 32px;
+            height: 21px;
             margin-right: 8px;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+            border-radius: 2px;
+            font-family: Inter, Inter;
+            font-weight: bold;
+            font-size: 14px;
+            color: #FFFFFF;
+            line-height: 21px;
+            box-sizing: border-box;
+            padding-left: 6px;
         }
         .titleRight{
             font-family: Source Han Sans CN, Source Han Sans CN;
@@ -24,28 +32,28 @@
             color: #1D293C;
         }
         .back1{
-            background: #F5BB21;
+            background: linear-gradient( 90deg, #F5BB21 0%, #EFD590 100%);
         }
         .back2{
-            background: #14A971;
+            background: linear-gradient( 90deg, #14A971 0%, #40E4A6 100%);
         }
         .back3{
-            background: #7548F5;
+            background: linear-gradient( 90deg, #7548F5 0%, #AC93F2 100%);
         }
         .back4{
-            background: #FF9000;
+            background: linear-gradient( 90deg, #FF9000 0%, #F6BB6E 100%);
         }
         .back5{
-            background: #D66E0F
+            background: linear-gradient( 90deg, #D66E0F 0%, #D6BDA6 100%);
         }
         .back6{
-            background: #F02BBC
+            background: linear-gradient( 90deg, #F02BBC 0%, #ED9CD8 100%);
         }
         .back7{
-            background: #22CCD8;
+            background: linear-gradient( 90deg, #22CCD8 0%, #85EBF2 100%);
         }
         .back8{
-            background: #3891E1;
+            background: linear-gradient( 90deg, #3891E1 0%, #96C8F4 100%);
         }
     }
 
@@ -195,6 +203,7 @@
             .imgItem{
                 width: 22px;
                 height: 22px;
+                margin-top: -7px;
                 >img{
                     width: 100%;
                     height: 100%;
@@ -210,7 +219,6 @@
         font-weight: 500;
         font-size: 13px;
         color: #64748B;
-        border-bottom: 1px #B9C2D1 dashed;
         .sportGuideTitle{
             display: flex;
             margin: 3px 0px;
@@ -242,7 +250,7 @@
 
 .recommendation{
     margin-top: 12px;
-    border-bottom: 1px #B9C2D1 dashed;
+    // border-bottom: 1px #B9C2D1 dashed;
     .recommendationTitle{
         font-family: Source Han Sans CN, Source Han Sans CN;
         font-weight: bold;
@@ -254,7 +262,7 @@
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
-        margin: 12px 0px;
+        margin: 10px 0px;
         .iconItem{
             background: #E9FBF4;
             border-radius: 999px 999px 999px 999px;
@@ -274,7 +282,7 @@
         line-height: 20px;
         .bottomBorder{
             border-bottom: 1px #B9C2D1 dashed;
-            padding: 10px 0px;
+            padding: 5px 0px;
         }
         .recommendationItem{
             margin: 5px 0px;
@@ -295,5 +303,28 @@
                 }
             }
         }
+    }
+}
+
+.attentionModel{
+    width: 100%;
+    background: #FFF3F1;
+    border-radius: 10px 10px 10px 10px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    .attentionTitle{
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: bold;
+        font-size: 14px;
+        color: #FF6C52;
+        line-height: 22px;
+    }
+    .attentionText{
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-weight: 400;
+        font-size: 13px;
+        color: #64748B;
+        line-height: 20px;
+        margin-top: 5px;
     }
 }
