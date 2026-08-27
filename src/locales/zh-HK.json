@@ -150,5 +150,17 @@
   "bmi_label": "BMI",
   "recommend_type_should": "宜",
   "recommend_type_avoid": "忌",
-  "route_instruction": "請通過 /report/:id 訪問指定報告"
+  "route_instruction": "請通過 /report/:id 訪問指定報告",
+  "confidence_level": {
+    "title": "檢測一致性與置信度",
+    "confidence_result": "置信度結果：",
+    "further_judgment": "進一步判斷",
+    "differential_diagnosis": "鑑別診斷：",
+    "further_verification": "進一步驗證：",
+    "data_limitations": "數據局限：",
+    "consistency_check": "一致性校驗：",
+    "score": "評分",
+    "check_conclusion": "校驗結論：",
+    "consistency_anomaly": "一致性異常："
+  }
 }

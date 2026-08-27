@@ -9,6 +9,7 @@ import PulseEvaluation from './components/pulseEvaluation';
 import PhysicalFitness from './components/physicalFitness';
 import HealthManagementPlan from './components/healthManagementPlan';
 import LoadingState from './components/loadingState';
+import ConfidenceLevel from './components/confidenceLevel';
 import { exportImage } from '@/utils/exportImage';
 import { throttle } from '@/utils/tool'
 import { getHealthReport } from '@/api/report'
@@ -44,6 +45,8 @@ export default function ReportDetail() {
     const [physicalFitnessAnalysis,setPhysicalFitnessAnalysis] = useState(null) // 体质评估
 
     const [healthHanagementHlan, setHealthHanagementHlan] = useState(null) // 健康管理方案
+    const [diagnosisConfidence, setDiagnosisConfidence] = useState(null) // 健康管理方案
+    const [verification, setVerification] = useState(null) // 健康管理方案
 
     const [isTimeout, setIsTimeout] = useState(false) // 记录是否生成超时
     const [isNotFound, setIsNotFound] = useState(false) // 记录是否未找到报告
@@ -80,6 +83,8 @@ export default function ReportDetail() {
                     setPulseConditionEvaluation(data.pulseConditionEvaluation) // 设置脉搏评估评估
                     setPhysicalFitnessAnalysis(data.physicalFitnessAnalysis) // 【修复】必须把接口的体质数据存入 state
                     setHealthHanagementHlan(data.healthHanagementHlan) // 设置健康管理方案
+                    setDiagnosisConfidence(data.diagnosis_confidence) 
+                    setVerification(data.verification) 
                 } else if( res.code == 404){
                     // 处理404
                     setIsNotFound(true);
@@ -147,6 +152,7 @@ export default function ReportDetail() {
             <PulseEvaluation pulseConditionEvaluation={pulseConditionEvaluation}></PulseEvaluation>
             <PhysicalFitness physicalFitnessAnalysis={physicalFitnessAnalysis}></PhysicalFitness>
             <HealthManagementPlan healthHanagementHlan={healthHanagementHlan}></HealthManagementPlan>
+            <ConfidenceLevel diagnosisConfidence={diagnosisConfidence} verification={verification}></ConfidenceLevel>
             <div className={`${style.bottomTip} pdf-avoid-break`}>
                 <div className={style.bottomTitle}>{t('instruction')}</div>
                 <div>{t('instruction_1')}</div>

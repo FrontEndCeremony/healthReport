@@ -150,5 +150,17 @@
   "bmi_label": "BMI",
   "recommend_type_should": "宜",
   "recommend_type_avoid": "忌",
-  "route_instruction": "请通过 /report/:id 访问指定报告"
+  "route_instruction": "请通过 /report/:id 访问指定报告",
+  "confidence_level": {
+    "title": "检测一致性与置信度",
+    "confidence_result": "置信度结果：",
+    "further_judgment": "进一步判断",
+    "differential_diagnosis": "鉴别诊断：",
+    "further_verification": "进一步验证：",
+    "data_limitations": "数据局限：",
+    "consistency_check": "一致性校验：",
+    "score": "评分",
+    "check_conclusion": "校验结论：",
+    "consistency_anomaly": "一致性异常："
+  }
 }
