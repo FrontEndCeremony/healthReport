@@ -73,8 +73,8 @@ export default function ConfidenceLevel({ diagnosisConfidence = {}, verification
                     </span>
                 </div>
                 <div className={style.confidenceText}>
-                    <div>{t('confidence_level.check_conclusion')}{verification?.confidence_marker}</div>
-                    <div>{t('confidence_level.consistency_anomaly')}</div>
+                    { verification?.confidence_marker && <div>{t('confidence_level.check_conclusion')}{verification?.confidence_marker}</div>}
+                    { verification?.violations && verification?.violations?.length > 0 && <div>{t('confidence_level.consistency_anomaly')}</div>}
                     { verification?.violations?.map((item,index) =>{
                         return(
                             <div key={index}>
