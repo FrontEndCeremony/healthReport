@@ -1,10 +1,22 @@
 import style from './index.module.less'
 import { useTranslation } from 'react-i18next'
 
+interface ConfidenceLevelProps {
+    diagnosisConfidence?: {
+        overall_confidence?: string;
+        explanation?: string;
+        differential_diagnosis?: string[];
+        further_verification?: string[];
+        data_limitations?: string[];
+    } | null;
+    verification?: {
+        score?: number;
+        confidence_marker?: string;
+        violations?: string[];
+    } | null;
+}
 
-export default function ConfidenceLevel(props){
-
-    const { diagnosisConfidence={}, verification={} } = props
+export default function ConfidenceLevel({ diagnosisConfidence = {}, verification = {} }: ConfidenceLevelProps){
     const { t } = useTranslation();
 
     return (
@@ -55,8 +67,8 @@ export default function ConfidenceLevel(props){
             <div className={style.confidenceContent}>
                 <div className={style.confidenceTitle}>
                     {t('confidence_level.consistency_check')}
-                    <span style={verification?.score < 33 ? { color:'#FF4D4F'} :
-                            verification?.score < 66 ? { color:'#FAAD14' }: { color:'#52C41A'}}>
+                    <span style={(verification?.score ?? 0) < 33 ? { color:'#FF4D4F'} :
+                            (verification?.score ?? 0) < 66 ? { color:'#FAAD14' }: { color:'#52C41A'}}>
                             {t('confidence_level.score')} {verification?.score}
                     </span>
                 </div>
