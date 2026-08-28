@@ -9,7 +9,7 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
   const { t } = useTranslation();
 
   // 防止解构时 tongueEvaluation 为 undefined 导致报错，同时给个默认值 []
-  const { tongueCharacteristics = [], tongueImage = "" } = tongueEvaluation;
+  const { tongueCharacteristics = [], tongueImage = "", description='' } = tongueEvaluation;
 
   const [iconList, setIconList] = useState([]);
 
@@ -76,17 +76,21 @@ export default function Tongue({ tongueEvaluation = {} }: any) {
                   })}
               </div>
             </div>
+            <div className={style.tongueText}>
+              {tongueCharacteristics?.map((item: any, index: number) => {
+                return (
+                  <div key={index} className={style.detailModel}>
+                    <div className={style.detailTitle}>
+                      { index + 1}
+                    </div>
+                    <div className={style.detailText}>{item.characteristics}：{item.description}</div>
+                  </div>
+                );
+              })}
+            </div>
+            
             <div className={style.title}>{t("tongue_analysis")}</div>
-            {tongueCharacteristics?.map((item: any, index: number) => {
-              return (
-                <div key={index} className={style.detailModel}>
-                  {/* <div className={style.detailTitle}>
-                    { index + 1}
-                  </div> */}
-                  <div className={style.detailText}>{item.characteristics}：{item.description}</div>
-                </div>
-              );
-            })}
+            <div className={style.tongueDetail}>{description}</div>
           </div>
         )}
       </BaseModel>
