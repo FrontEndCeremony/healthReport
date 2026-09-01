@@ -54,14 +54,14 @@ export default function ConfidenceLevel({ diagnosisConfidence = {}, verification
                             </div>
                         )
                     })}
-                    <div>{t('confidence_level.data_limitations')}</div>
+                    {/* <div>{t('confidence_level.data_limitations')}</div>
                     { diagnosisConfidence?.data_limitations?.map((item,index) =>{
                         return(
                             <div key={index}>
                                 &nbsp;· {item}
                             </div>
                         )
-                    })}
+                    })} */}
                 </div>
             </div>
             <div className={style.confidenceContent}>

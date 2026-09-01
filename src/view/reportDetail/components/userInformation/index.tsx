@@ -25,11 +25,11 @@ export default function UserInformation({ patientInfo = {} }: any) {
                 </div>
             </div>
             <div className={style.lineDetail}>
-                <div className={style.detailItem} style={{ flex: 1.3 }}>
+                <div className={style.detailItem} style={ height ? { flex: 1.3 } : {}}>
                     <div className={style.label}>{t('height')}</div>
                     <div className={style.valueText}>{height || notProvided} { height ? t('unit_cm') : ''}</div>
                 </div>
-                <div className={style.detailItem} style={{ flex: 1.1 }}>
+                <div className={style.detailItem} style={weight ? { flex: 1.1 } : {} }>
                     <div className={style.label}>{t('weight')}</div>
                     <div className={style.valueText}>{weight || notProvided} { weight ? t('unit_kg') : ''}</div>
                 </div>
