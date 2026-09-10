@@ -1,6 +1,6 @@
 import style from "./index.module.less";
 import BaseModel from "../baseModel";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import success_img from "@/assets/success_img.png";
 import ward_img from "@/assets/warn_img.png";
 import { useTranslation } from "react-i18next";
@@ -8,8 +8,17 @@ import noData from "@/assets/noData.png";
 export default function Tongue({ tongueEvaluation = {} }: any) {
   const { t } = useTranslation();
 
-  // 防止解构时 tongueEvaluation 为 undefined 导致报错，同时给个默认值 []
-  const { tongueCharacteristics = [], tongueImage = "", description='' } = tongueEvaluation;
+  // 防止解构时 tongueEvaluation 为 undefined 导致报错
+  const { tongueImage = "", description='' } = tongueEvaluation || {};
+  // 舌象特征可能为 null，或数组里混有空元素（解构默认值对 null 不生效），统一归一化成纯数组
+  // 注意用 useMemo 保持引用稳定，否则作为 useEffect 依赖会导致无限重渲染
+  const tongueCharacteristics = useMemo(
+    () =>
+      Array.isArray(tongueEvaluation?.tongueCharacteristics)
+        ? tongueEvaluation.tongueCharacteristics.filter(Boolean)
+        : [],
+    [tongueEvaluation]
+  );
 
   const [iconList, setIconList] = useState([]);
 

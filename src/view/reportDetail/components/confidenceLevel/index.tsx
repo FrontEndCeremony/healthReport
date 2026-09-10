@@ -29,7 +29,7 @@ export default function ConfidenceLevel({ diagnosisConfidence = {}, verification
                 <div className={style.confidenceLabel}>{t('confidence_level.confidence_result')}</div>
                 <div className={style.confidenceValue}  style={ diagnosisConfidence?.overall_confidence == '低' ? { color:'#FF4D4F'} :
                     diagnosisConfidence?.overall_confidence == '中'? { color:'#FAAD14' }: { color:'#52C41A'}}>
-                    {diagnosisConfidence?.overall_confidence}
+                    {diagnosisConfidence?.overall_confidence || '--'}
                 </div>
             </div>
             <div className={style.confidenceDetail}>
@@ -69,7 +69,7 @@ export default function ConfidenceLevel({ diagnosisConfidence = {}, verification
                     {t('confidence_level.consistency_check')}
                     <span style={(verification?.score ?? 0) < 33 ? { color:'#FF4D4F'} :
                             (verification?.score ?? 0) < 66 ? { color:'#FAAD14' }: { color:'#52C41A'}}>
-                            {t('confidence_level.score')} {verification?.score}
+                            {t('confidence_level.score')} {verification?.score ?? '--'}
                     </span>
                 </div>
                 <div className={style.confidenceText}>

@@ -19,8 +19,8 @@ export default function PulseEvaluation({
   return (
     <>
       <BaseModel title={t("pulse_evaluation")}>
-        {rightPularResult?.chenfuInfo?.cun == '' &&
-        leftPularResult?.chenfuInfo?.cun =='' ? (
+        {(rightPularResult?.chenfuInfo?.cun ?? '') === '' &&
+        (leftPularResult?.chenfuInfo?.cun ?? '') === '' ? (
           <div>
             <div className={style.noDataImg}>
               <img src={noData} />
@@ -154,7 +154,7 @@ export default function PulseEvaluation({
             <div className={style.bottomTitle}>{t("pulse_result")}</div>
             <div className={style.typeDetail}>
               {t("your_pulse")}&nbsp;
-              <span className={style.type}>{comprehensiveResult}</span>
+              <span className={style.type}>{comprehensiveResult || '--'}</span>
             </div>
             <div className={style.tripleEnergizer}>
               <img src={tripleEnergizer}/>

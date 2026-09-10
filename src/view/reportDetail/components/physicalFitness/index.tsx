@@ -101,29 +101,29 @@ export default function PhysicalFitness({ physicalFitnessAnalysis = {} }: any) {
                     <div className={style.resultTitle}>{t('physical_fitness_result')}</div>
                     <div className={style.resultDesc}>{t('physical_fitness_desc')}</div>
                     <div className={style.resultDesc}>
-                        {t('main_physical_fitness')} <span className={style.highlightText}>{PhysicalFitnessType}</span>
+                        {t('main_physical_fitness')} <span className={style.highlightText}>{PhysicalFitnessType || '--'}</span>
                     </div>
 
                     <div className={style.tableContainer}>
                         <div className={style.tableRow}>
                             <div className={style.rowLabel}>{t('overall_features')}</div>
-                            <div className={style.rowValue}>{OverallCharacteristics}</div>
+                            <div className={style.rowValue}>{OverallCharacteristics || '--'}</div>
                         </div>
                         <div className={`${style.tableRow} ${style.activeBak}`}>
                             <div className={style.rowLabel}>{t('common_manifestations')}</div>
-                            <div className={style.rowValue}>{CommonManifestations}</div>
+                            <div className={style.rowValue}>{CommonManifestations || '--'}</div>
                         </div>
                         <div className={style.tableRow}>
                             <div className={style.rowLabel}>{t('physical_features')}</div>
-                            <div className={style.rowValue}>{CommonPhysicalCharacteristics}</div>
+                            <div className={style.rowValue}>{CommonPhysicalCharacteristics || '--'}</div>
                         </div>
                         <div className={`${style.tableRow} ${style.activeBak}`}>
                             <div className={style.rowLabel}>{t('psychological_features')}</div>
-                            <div className={style.rowValue}>{psychicCharacteristic}</div>
+                            <div className={style.rowValue}>{psychicCharacteristic || '--'}</div>
                         </div>
                         <div className={style.tableRow}>
                             <div className={style.rowLabel}>{t('disease_tendency')}</div>
-                            <div className={style.rowValue}>{IncidenceTendency}</div>
+                            <div className={style.rowValue}>{IncidenceTendency || '--'}</div>
                         </div>
                     </div>
                 </div>

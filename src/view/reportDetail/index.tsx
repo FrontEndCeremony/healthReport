@@ -62,14 +62,14 @@ export default function ReportDetail() {
         const fetchReport = () => {
             getHealthReport({ uuid, langue }).then(res => {
                 if(res.code == 0){
-                    // 分发消息
-                    const data = res.data;
-                    setCheckTime(data.checkTime) // 设置检测时间
-                    setPatientInfo(data.patientInfo) // 设置患者信息
+                    // 分发消息（后端部分字段没值时会返回 null，这里统一兜底，防止子组件解构/遍历时报错白屏）
+                    const data = res.data || {};
+                    setCheckTime(data.checkTime || '--') // 设置检测时间
+                    setPatientInfo(data.patientInfo || {}) // 设置患者信息（若为 null，页面会一直停留在 loading）
                     setComprehensiveAnalysis({
-                        ...data.comprehensiveAnalysis,
-                        comprehensive_result:data.comprehensive_result,
-                        health_risk: data.health_risk.map( (item: any, index: number) =>{
+                        ...(data.comprehensiveAnalysis || {}),
+                        comprehensive_result: Array.isArray(data.comprehensive_result) ? data.comprehensive_result : [],
+                        health_risk: (Array.isArray(data.health_risk) ? data.health_risk.filter(Boolean) : []).map( (item: any, index: number) =>{
                             return {
                                 risk_type: item.risk_type,
                                 risk_detail: item.risk_detail,
@@ -77,14 +77,14 @@ export default function ReportDetail() {
                                 open: false
                             }
                         }),
-                        condition_suggestion:data.condition_suggestion,
+                        condition_suggestion: data.condition_suggestion || {},
                     }) // 设置中医健康评估
-                    setTongueEvaluation(data.tongueEvaluation) // 设置舌像评估
-                    setPulseConditionEvaluation(data.pulseConditionEvaluation) // 设置脉搏评估评估
-                    setPhysicalFitnessAnalysis(data.physicalFitnessAnalysis) // 【修复】必须把接口的体质数据存入 state
-                    setHealthHanagementHlan(data.healthHanagementHlan) // 设置健康管理方案
-                    setDiagnosisConfidence(data.diagnosis_confidence) 
-                    setVerification(data.verification) 
+                    setTongueEvaluation(data.tongueEvaluation || {}) // 设置舌像评估
+                    setPulseConditionEvaluation(data.pulseConditionEvaluation || {}) // 设置脉搏评估评估
+                    setPhysicalFitnessAnalysis(data.physicalFitnessAnalysis || {}) // 【修复】必须把接口的体质数据存入 state
+                    setHealthHanagementHlan(data.healthHanagementHlan || {}) // 设置健康管理方案
+                    setDiagnosisConfidence(data.diagnosis_confidence || {})
+                    setVerification(data.verification || {})
                 } else if( res.code == 404){
                     // 处理404
                     setIsNotFound(true);

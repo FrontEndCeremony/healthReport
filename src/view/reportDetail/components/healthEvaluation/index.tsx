@@ -12,7 +12,17 @@ interface HealthEvaluationProps {
 
 export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthEvaluationProps) {
   const { t } = useTranslation();
-  const { liverScore = 0, heartScore = 0, spleenScore = 0, lungsScore = 0, renalScore = 0, comprehensiveDescription = '', healthRisk = '', comprehensive_result = [] , health_risk = [], condition_suggestion = {} } = comprehensiveAnalysis || {}
+  const { comprehensiveDescription = '', healthRisk = '', comprehensive_result, health_risk, condition_suggestion } = comprehensiveAnalysis || {}
+
+  // 后端部分字段没值时会返回 null（解构默认值只对 undefined 生效），这里统一兜底
+  const liverScore = comprehensiveAnalysis?.liverScore || 0
+  const heartScore = comprehensiveAnalysis?.heartScore || 0
+  const spleenScore = comprehensiveAnalysis?.spleenScore || 0
+  const lungsScore = comprehensiveAnalysis?.lungsScore || 0
+  const renalScore = comprehensiveAnalysis?.renalScore || 0
+  const comprehensiveResult = Array.isArray(comprehensive_result) ? comprehensive_result : []
+  const healthRiskList = Array.isArray(health_risk) ? health_risk : []
+  const conditionSuggestion = condition_suggestion || {}
 
   // 动画相关状态
   const [animatedScores, setAnimatedScores] = useState({
@@ -43,7 +53,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
 
     // 数据排序
     const suggestArr = () => {
-      const showArr = condition_suggestion?.scheme.map((item: any, index: number) =>{
+      const showArr = conditionSuggestion?.scheme?.map((item: any, index: number) =>{
         return {
           ...item,
           id: index
@@ -91,7 +101,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
            }>{ healthRisk }</span>
         </div>
         <div className={style.resultDetail}>
-            {comprehensive_result.length > 0 ? comprehensive_result.map((item: any, index: number) => (
+            {comprehensiveResult.length > 0 ? comprehensiveResult.map((item: any, index: number) => (
                 <div key={index} className={style.resultItem}>{item}</div>
             )) : <div className={style.noResult}>
                 {t('compNoResult')}
@@ -222,7 +232,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                 </div>
             </div>
             {
-                health_risk.map((item: any, index: number) => {
+                healthRiskList.map((item: any, index: number) => {
                     return (
                         <div className={style.riskDetail} key={index}>
                             <div className={style.tagDetail}>
@@ -246,7 +256,7 @@ export default function HealthEvaluation({ comprehensiveAnalysis = {} }: HealthE
                 </div>
             </div>
             <div className={style.tipSubTitle}>
-                {condition_suggestion?.suggest || t('result.constNoSuggest')}
+                {conditionSuggestion?.suggest || t('result.constNoSuggest')}
             </div>
             <div className={style.bottomSuggest}>
                 { suggestArr().length > 0 && suggestArr().map((item: any, index: number) =>{

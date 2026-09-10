@@ -5,7 +5,7 @@ import noticeIcon from '@/assets/noticeIcon.png'
 
 export default function HealthManagementPlan({ healthHanagementHlan = {} }: any) {
     const { t } = useTranslation();
-    const { description = '', direction = '', dietConditioningScheme = {}, physicalTherapyProgram = {}, footBathGuidance = {}, kungfuScheme = {}, sportsGuidance = {}, healthKnowledge = {}, lifestyleConditioningScheme = {}  } = healthHanagementHlan
+    const { description = '', direction = '', dietConditioningScheme = {}, physicalTherapyProgram = {}, footBathGuidance = {}, kungfuScheme = {}, sportsGuidance = {}, healthKnowledge = {}, lifestyleConditioningScheme = {}  } = healthHanagementHlan || {}
     return (
         <>
             <BaseModel title={t('health_management_plan')}>
@@ -45,14 +45,14 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         {t('ingredient_recommendation')}
                     </div>
                     <div className={style.recommendationIcon}>
-                        {dietConditioningScheme?.recommendedFood?.map((item: any, index: number) => {
+                        {dietConditioningScheme?.recommendedFood?.filter(Boolean).map((item: any, index: number) => {
                             return (
                                 <div className={style.iconItem} key={index}>{item.name}</div>
                             )
                         })}
                     </div>
                     <div className={style.recommendationBottom}>
-                        {dietConditioningScheme?.recommendedFood?.map((item: any, index: number) => {
+                        {dietConditioningScheme?.recommendedFood?.filter(Boolean).map((item: any, index: number) => {
                             return (
                                 <div key={index} className={style.recommendationItem}>
                                     <div className={style.recommendationTipTitle}>
@@ -73,7 +73,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                            {t('avoid_foods')}
                         </div>
                         <div className={style.attentionText}>
-                            { dietConditioningScheme?.avoidedFoods.map((item: any, index: number) =>{
+                            { dietConditioningScheme?.avoidedFoods?.map((item: any, index: number) =>{
                                 return (
                                     <div  key={index}>
                                         · &nbsp;{item}
@@ -87,7 +87,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         {t('diet_recommendation')}
                     </div>
                     {
-                        dietConditioningScheme?.recommendedDrink?.map((item: any, index: number) => {
+                        dietConditioningScheme?.recommendedDrink?.filter(Boolean).map((item: any, index: number) => {
                             return (
                                 <div key={index}>
                                     <div className={style.recommendationIcon}>
@@ -127,7 +127,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         <br/>{t('acupoint_recommendation')}
                     </div>
                     {
-                        physicalTherapyProgram?.acupointTherapy?.map((item: any, index: number) => {
+                        physicalTherapyProgram?.acupointTherapy?.filter(Boolean).map((item: any, index: number) => {
                             return (
                                 <div className={`${style.stepdetail} ${style.contentBack3}`} key={index}>
                                     <div className={`${style.stepInnerTitle} ${style.textColor1}`}>{index + 1}.{item.acupuncturePoint}</div>
@@ -166,7 +166,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         <div>{t('foot_bath_desc2')}</div>
                     </div>
                     {
-                        footBathGuidance?.achievementMethod?.map((item: any, index: number) => {
+                        footBathGuidance?.achievementMethod?.filter(Boolean).map((item: any, index: number) => {
                             return (
                                 <div key={index}>
                                     <div className={style.stepIcon}>
@@ -207,7 +207,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         <div>{t('exercises_desc1')}</div>
                         <div>{t('exercises_desc2')}</div>
                     </div>
-                    {kungfuScheme?.kungfuPlan?.map((item: any,index: number) => {
+                    {kungfuScheme?.kungfuPlan?.filter(Boolean).map((item: any,index: number) => {
                         return (
                             <div className={`${style.stepdetail} ${style.contentBack5}`} key={index}>
                                 <div className={`${style.stepInnerTitle} ${style.textColor3}`}>{index + 1}.{item.name}</div>
@@ -258,7 +258,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                             </div>
                             {t('precautions_label')}
                         </div>
-                        <div>{sportsGuidance.sportsPattersNeedAttention || ''}</div>
+                        <div>{sportsGuidance?.sportsPattersNeedAttention || ''}</div>
                     </div>
                 </div>
                 <div className={style.stepContent}>
@@ -309,7 +309,7 @@ export default function HealthManagementPlan({ healthHanagementHlan = {} }: any)
                         })}
                     </div>
                     <div className={style.lifeTip}>
-                        {t('remark_label')}{lifestyleConditioningScheme.genderNotes}
+                        {t('remark_label')}{lifestyleConditioningScheme?.genderNotes || ''}
                     </div>
                 </div>
                 <div className={style.stepContent}>
