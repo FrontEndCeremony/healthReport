@@ -3,6 +3,8 @@
   "save_as": "另存為",
   "save_pdf": "保存為PDF",
   "save_image": "保存為圖片",
+  "pdf_filename": "健康報告.pdf",
+  "pdf_wechat_tip": "當前環境不支持直接下載，請點擊右上角「···」選擇「在瀏覽器打開」後保存",
   "long_press_save": "長按下方圖片保存到手機",
   "close": "關閉",
   "cancel": "取消",

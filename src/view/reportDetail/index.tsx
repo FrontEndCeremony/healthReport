@@ -11,6 +11,7 @@ import HealthManagementPlan from './components/healthManagementPlan';
 import LoadingState from './components/loadingState';
 import ConfidenceLevel from './components/confidenceLevel';
 import { exportImage } from '@/utils/exportImage';
+import { exportPDF, triggerPdfDownload } from '@/utils/exportPdf';
 import { throttle } from '@/utils/tool'
 import { getHealthReport } from '@/api/report'
 import { useEffect, useState } from 'react'
@@ -54,6 +55,7 @@ export default function ReportDetail() {
     const [isExporting, setIsExporting] = useState(false) // 导出加载状态
     const [exportImgUrl, setExportImgUrl] = useState<string | null>(null) // 生成的长图URL
     const [showSaveDrawer, setShowSaveDrawer] = useState(false) // 另存为底部抽屉
+    const [pdfPreview, setPdfPreview] = useState<{ url: string; images: string[] } | null>(null) // 微信内PDF预览（分页截图）
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
@@ -139,6 +141,34 @@ export default function ReportDetail() {
         setIsExporting(false);
     };
 
+    const handleExportPdf = async () => {
+        setShowSaveDrawer(false);
+        setIsExporting(true);
+        try {
+            const result = await exportPDF('report-content');
+            if (result) {
+                const url = URL.createObjectURL(result.blob);
+                const downloaded = triggerPdfDownload(url, t('pdf_filename'));
+                if (downloaded) {
+                    // 延迟释放，给浏览器下载流程留出时间
+                    setTimeout(() => URL.revokeObjectURL(url), 60000);
+                } else {
+                    // 微信内置浏览器等不支持下载/渲染PDF的环境，用分页截图做预览
+                    setPdfPreview({ url, images: result.pageImages });
+                }
+            }
+        } finally {
+            setIsExporting(false);
+        }
+    };
+
+    const handleClosePdfPreview = () => {
+        if (pdfPreview) {
+            URL.revokeObjectURL(pdfPreview.url);
+        }
+        setPdfPreview(null);
+    };
+
     const handleCloseModal = () => {
         setExportImgUrl(null);
     };
@@ -181,7 +211,7 @@ export default function ReportDetail() {
                     <div className={style.drawerMask} onClick={() => setShowSaveDrawer(false)}></div>
                     <div className={style.drawerContent}>
                         <div className={style.drawerGroup}>
-                            <div className={style.drawerBtn} onClick={() => { /* 保存为PDF功能待开发 */ }}>
+                            <div className={style.drawerBtn} onClick={throttle(() => handleExportPdf(), 5000)}>
                                 {t('save_pdf')}
                             </div>
                             <div className={style.drawerBtn} onClick={throttle(() => handleExport(), 5000)}>
@@ -206,6 +236,31 @@ export default function ReportDetail() {
                         </div>
                         <div className={style.imageContainer}>
                             <img src={exportImgUrl} alt="Report" className={style.previewImage} />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* PDF预览弹窗（微信等不支持直接下载的环境，用分页截图展示） */}
+            {pdfPreview && (
+                <div className={style.imageModal}>
+                    <div className={style.modalMask} onClick={handleClosePdfPreview}></div>
+                    <div className={style.modalContent}>
+                        <div className={style.modalHeader}>
+                            <span className={style.modalTitle}></span>
+                            <span className={style.closeBtn} onClick={handleClosePdfPreview}>{t('close')}</span>
+                        </div>
+                        <div className={style.pdfTip}>{t('pdf_wechat_tip')}</div>
+                        <div className={style.imageContainer}>
+                            {pdfPreview.images.map((img, index) => (
+                                <img
+                                    key={index}
+                                    src={img}
+                                    alt={`page-${index + 1}`}
+                                    className={style.pdfPageImage}
+                                    onContextMenu={(e) => e.preventDefault()}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>

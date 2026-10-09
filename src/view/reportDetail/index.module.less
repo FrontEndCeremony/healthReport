@@ -218,4 +218,29 @@
         display: block;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+
+    /* PDF预览弹窗 */
+    .pdfTip {
+        padding: 10px 16px;
+        background: #FFF7E6;
+        font-family: Source Han Sans CN, Source Han Sans CN;
+        font-size: 13px;
+        color: #D46B08;
+        line-height: 20px;
+    }
+
+    .previewImage + .previewImage {
+        margin-top: 12px;
+    }
+
+    /* PDF分页截图：禁止长按呼出微信的保存/识别菜单 */
+    .pdfPageImage {
+        width: 100%;
+        display: block;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        pointer-events: none; // 让长按事件落在容器上，微信就不会弹出图片操作菜单
+    }
 }

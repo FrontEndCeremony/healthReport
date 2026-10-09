@@ -112,9 +112,58 @@ const getSafePageEnd = (
   return safeEnd;
 };
 
-export const exportPDF = async (elementId: string, filename: string) => {
+// iOS Safari / 微信 WKWebView 对单张 canvas 有约 1677 万像素的硬限制，超限会直接渲染成空白，
+// 长报告按 2 倍缩放很容易超，这里从 2 开始逐级降，直到满足限制。
+const MAX_CANVAS_PIXELS = 16_000_000;
+const MAX_CANVAS_WIDTH = 1600;
+
+const getRenderScale = (element: HTMLElement) => {
+  const width = element.offsetWidth || element.scrollWidth;
+  const height = element.scrollHeight || element.offsetHeight;
+
+  let scale = 2;
+  while (scale > 1 && width * height * scale * scale > MAX_CANVAS_PIXELS) {
+    scale -= 0.25;
+  }
+
+  if (width * scale > MAX_CANVAS_WIDTH) {
+    scale = MAX_CANVAS_WIDTH / width;
+  }
+
+  return scale;
+};
+
+const isWeChat = () => /MicroMessenger/i.test(navigator.userAgent);
+
+/**
+ * 尝试用标准 a[download] 方式下载（Chrome / Edge / Firefox / 各厂商手机浏览器）。
+ * 返回 true 表示已触发下载；返回 false 表示当前环境不支持（微信内置浏览器），
+ * 调用方应改用预览弹窗让用户在中转打开。
+ */
+export const triggerPdfDownload = (url: string, filename: string): boolean => {
+  if (isWeChat()) {
+    return false;
+  }
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  return true;
+};
+
+export type PdfExportResult = {
+  blob: Blob;
+  // 各分页的截图（与嵌入PDF的画面一致），供微信等无法渲染PDF的环境做预览
+  pageImages: string[];
+};
+
+export const exportPDF = async (elementId: string): Promise<PdfExportResult | null> => {
   const element = document.getElementById(elementId);
-  if (!element) return;
+  if (!element) return null;
 
   // 1. 隐藏不需要打印的元素
   const btns = element.querySelectorAll('.pdf-hide');
@@ -128,16 +177,16 @@ export const exportPDF = async (elementId: string, filename: string) => {
   const A4_HEIGHT = 841.89;
 
   try {
-    const renderScale = 2;
+    // 2. 自适应高清 Canvas（兼顾清晰度与 iOS canvas 像素上限）
+    const renderScale = getRenderScale(element);
 
-    // 2. 生成高清 Canvas
-    const canvas = await html2canvas(element, { 
-      scale: renderScale, 
-      useCORS: true, 
+    const canvas = await html2canvas(element, {
+      scale: renderScale,
+      useCORS: true,
       backgroundColor: '#ffffff',
       allowTaint: true
-    } as any); 
-    
+    } as any);
+
     // 3. 计算 DOM 尺寸与 PDF 尺寸的映射关系
     const domWidth = element.offsetWidth;
     const domHeight = canvas.height / renderScale;
@@ -155,11 +204,12 @@ export const exportPDF = async (elementId: string, filename: string) => {
       orientation: 'p',
       unit: 'pt',
       format: 'a4',
-      compress: true 
+      compress: true
     });
 
     let startY = 0;
     let isFirstPage = true;
+    const pageImages: string[] = [];
 
     // 5. 动态切割画布，只把分页线回退到文字行顶部，避免大面积空白。
     while (startY < domHeight) {
@@ -197,14 +247,19 @@ export const exportPDF = async (elementId: string, filename: string) => {
         sliceHeightPx,
       );
 
-      const pageData = pageCanvas.toDataURL('image/jpeg', 1.0);
+      // JPEG 质量 0.85：文字类内容肉眼与 1.0 无差别，但体积能省一半以上
+      const pageData = pageCanvas.toDataURL('image/jpeg', 0.85);
+      pageImages.push(pageData);
       const pageHeightPDF = (sliceHeightPx / renderScale) * pdfScale;
       pdf.addImage(pageData, 'JPEG', 0, 0, A4_WIDTH, pageHeightPDF);
 
       startY = safeY;
     }
-    
-    pdf.save(filename);
+
+    return { blob: pdf.output('blob'), pageImages };
+  } catch (error) {
+    console.error('导出PDF失败', error);
+    return null;
   } finally {
     // 6. 恢复被隐藏的元素
     btns.forEach((btn: any, index) => {
