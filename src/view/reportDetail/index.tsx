@@ -53,6 +53,7 @@ export default function ReportDetail() {
 
     const [isExporting, setIsExporting] = useState(false) // 导出加载状态
     const [exportImgUrl, setExportImgUrl] = useState<string | null>(null) // 生成的长图URL
+    const [showSaveDrawer, setShowSaveDrawer] = useState(false) // 另存为底部抽屉
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
@@ -129,6 +130,7 @@ export default function ReportDetail() {
     }
 
     const handleExport = async () => {
+        setShowSaveDrawer(false);
         setIsExporting(true);
         const imgData = await exportImage('report-content');
         if (imgData) {
@@ -159,8 +161,8 @@ export default function ReportDetail() {
                 <div>{t('instruction_2')}</div>
                 <div>{t('instruction_3')}</div>
             </div>
-            <div className={`${style.bottomButton} pdf-hide`} onClick={throttle(() => handleExport(), 5000)}>
-                {isExporting ? t('loading') : t('save_image')}
+            <div className={`${style.bottomButton} pdf-hide`} onClick={() => setShowSaveDrawer(true)}>
+                {t('save_as')}
             </div>
             <div className={style.QRCodeText}>{t('qrcode_tip')}</div>
             <div className={style.QRCodeImg}>
@@ -172,6 +174,26 @@ export default function ReportDetail() {
             <div className={`${style.bottomText} pdf-avoid-break`}>
                 {t('generate_time')}{checkTime}
             </div>
+
+            {/* 另存为底部抽屉 */}
+            {showSaveDrawer && (
+                <div className={`${style.saveDrawer} pdf-hide`}>
+                    <div className={style.drawerMask} onClick={() => setShowSaveDrawer(false)}></div>
+                    <div className={style.drawerContent}>
+                        <div className={style.drawerGroup}>
+                            <div className={style.drawerBtn} onClick={() => { /* 保存为PDF功能待开发 */ }}>
+                                {t('save_pdf')}
+                            </div>
+                            <div className={style.drawerBtn} onClick={throttle(() => handleExport(), 5000)}>
+                                {isExporting ? t('loading') : t('save_image')}
+                            </div>
+                        </div>
+                        <div className={style.drawerCancel} onClick={() => setShowSaveDrawer(false)}>
+                            {t('cancel')}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* 长图预览弹窗 */}
             {exportImgUrl && (

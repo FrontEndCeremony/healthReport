@@ -1,9 +1,11 @@
 {
   "loading": "報告生成中",
+  "save_as": "另存為",
   "save_pdf": "保存為PDF",
   "save_image": "保存為圖片",
   "long_press_save": "長按下方圖片保存到手機",
   "close": "關閉",
+  "cancel": "取消",
   "instruction": "說明：",
   "instruction_1": "1.AI生成僅供參考，不能替代醫師診斷，建議您使用本報告2週後進行定期檢查。",
   "instruction_2": "2.健康管理是對個人健康風險因素通過檢測、評估及干預等手段，幫助個人控制健康風險、改善健康狀況的過程。",
